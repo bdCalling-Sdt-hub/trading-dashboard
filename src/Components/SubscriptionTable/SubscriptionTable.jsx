@@ -2,6 +2,7 @@ import { Table } from 'antd';
 import './subscription.css';
 import { useState } from 'react';
 import SubscriptionModal from '../SubscriptionModal/SubscriptionModal';
+import { useAllSubscriptionQuery } from '../../redux/Api/subscription';
 
 
 const specificPageHeaderStyle = {
@@ -12,39 +13,23 @@ const specificPageHeaderStyle = {
 
 
 
-// Columns data
-const data = [
-    {
-        key: '1',
-        subscriptionPlan: 'Gold',
-        membershipFee: '$19.99',
-        pointsRange: '0-24,999',
-        pointsPerSwap: '20% of product value',
-        pointsPerPositiveComment: '5',
-        pointsPerNegativeComment: '10',
-    },
-    {
-        key: '2',
-        subscriptionPlan: 'Platinum',
-        membershipFee: '$19.99',
-        pointsRange: '25,000-99,999',
-        pointsPerSwap: '20% of product value',
-        pointsPerPositiveComment: '25',
-        pointsPerNegativeComment: '25',
-    },
-    {
-        key: '3',
-        subscriptionPlan: 'Diamond',
-        membershipFee: '$19.99',
-        pointsRange: '100,000+',
-        pointsPerSwap: '20% of product value',
-        pointsPerPositiveComment: '50',
-        pointsPerNegativeComment: '50',
-    },
-];
-
 const SubscriptionTable = () => {
+
+    const {data : getAllSubscription} = useAllSubscriptionQuery()
+    console.log(getAllSubscription?.data);
     const [openAddModal, setOpenAddModal] = useState(false)
+
+    const formattedTableData = getAllSubscription?.data?.map((plan, i)=>{
+        return {
+            key: i + 1,
+            subscriptionPlan: plan?.planName,
+            membershipFee: plan?.fee,
+            pointsRange: plan?.pointRangeEnd,
+            pointsPerSwap: `${plan?.swapPoint}% of product value`,
+            pointsPerPositiveComment: plan?.positiveCommentPoint,
+            pointsPerNegativeComment: plan?.negativeCommentPoint,  
+        }
+    })
 
     // Columns items
     const columns = [
@@ -108,7 +93,7 @@ const SubscriptionTable = () => {
         setOpenAddModal(!openAddModal)
     }
     return (<div className="specific-page-table">
-        <Table columns={columns} dataSource={data} pagination={false} components={{
+        <Table columns={columns} dataSource={formattedTableData} pagination={false} components={{
             header: {
                 cell: (props) => (
                     <th {...props} style={specificPageHeaderStyle} />
