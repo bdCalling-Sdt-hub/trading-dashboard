@@ -8,9 +8,21 @@ const subscriptionApi = baseApi.injectEndpoints({
                     url  : '/subscription/all',
                     method : 'GET'
                 }
-            }
+            },
+            providesTags : ['subscription']
+        }),
+        updateSubscription : builder.mutation({
+            query : ({id, data})=>{
+                console.log(id);
+                return {
+                    url : `/subscription/edit/${id}`,
+                    method : "PATCH",
+                    body : data
+                }
+            },
+            invalidatesTags : ['subscription']
         })
     })
 })
 
-export const { useAllSubscriptionQuery }  = subscriptionApi
+export const { useAllSubscriptionQuery , useUpdateSubscriptionMutation }  = subscriptionApi

@@ -14,18 +14,19 @@ const specificPageHeaderStyle = {
 
 
 const SubscriptionTable = () => {
+    const [singlePlanData, setSinglePlanData ] = useState();
 
     const {data : getAllSubscription} = useAllSubscriptionQuery()
-    console.log(getAllSubscription?.data);
     const [openAddModal, setOpenAddModal] = useState(false)
 
     const formattedTableData = getAllSubscription?.data?.map((plan, i)=>{
         return {
+            id : plan?._id,
             key: i + 1,
             subscriptionPlan: plan?.planName,
             membershipFee: plan?.fee,
             pointsRange: plan?.pointRangeEnd,
-            pointsPerSwap: `${plan?.swapPoint}% of product value`,
+            pointsPerSwap: `${plan?.swapPoint}`,
             pointsPerPositiveComment: plan?.positiveCommentPoint,
             pointsPerNegativeComment: plan?.negativeCommentPoint,  
         }
@@ -72,8 +73,8 @@ const SubscriptionTable = () => {
             title: 'Action',
             dataIndex: 'action',
             key: 'action',
-            render: () => (
-                <a href="#edit" onClick={() => handleSubscriptionEdit()} className='text-[#3475F1]'>Edit</a>
+            render: (_,record) => (
+                <a href="#edit" onClick={() => handleSubscriptionEdit(record)} className='text-[#3475F1]'>Edit</a>
             ),
         },
     ];
@@ -89,8 +90,9 @@ const SubscriptionTable = () => {
         return index % 2 === 0 ? 'even-row' : '';
     };
 
-    const handleSubscriptionEdit = () => {
+    const handleSubscriptionEdit = (data) => {
         setOpenAddModal(!openAddModal)
+        setSinglePlanData(data)
     }
     return (<div className="specific-page-table">
         <Table columns={columns} dataSource={formattedTableData} pagination={false} components={{
@@ -104,7 +106,7 @@ const SubscriptionTable = () => {
             rowClassName={rowClassName}
         />
 
-        <SubscriptionModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} />
+        <SubscriptionModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} singlePlanData={singlePlanData} />
     </div>)
 };
 
