@@ -1,4 +1,4 @@
-import { Popconfirm, Table } from "antd";
+import { Pagination, Popconfirm, Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -9,8 +9,10 @@ import { imageUrl } from "../../redux/Api/baseApi";
 import { useDeleteAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import EditAddModal from "../EditAddModal";
-const MediaSettingTable = ({ getAllAds }) => {
-
+const MediaSettingTable = ({ getAllAds, setPage }) => {
+    console.log(getAllAds?.meta);
+    const currentPage = getAllAds?.meta?.page || 1; 
+    const pageSize = getAllAds?.meta?.limit || 10;
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
     const [deleteAds] = useDeleteAdsMutation()
@@ -91,9 +93,10 @@ const MediaSettingTable = ({ getAllAds }) => {
 
 
     const formattedData = getAllAds?.data?.map((add, i) => {
+        const serialNumber = (currentPage - 1) * pageSize + i + 1;
         return {
             key: add?._id,
-            changeOrder: i + 1,
+            changeOrder: serialNumber,
             imageUrl: `${imageUrl}${add?.image}`,
             viewOrder: add?.order,
             active: add?.isActive ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />,
@@ -103,19 +106,18 @@ const MediaSettingTable = ({ getAllAds }) => {
     })
 
     return (
-        <div className="p-2 ">
+        <div className=" ">
 
             <Table columns={columns} dataSource={formattedData}
-                pagination={{
-                    pageSize: 10,
-                    showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
-                    locale: {
-                        items_per_page: '',
-                        prev_page: 'Previous',
-                        next_page: 'Next',
-                    },
-                }}
+                pagination={false}
             />
+            <div className="flex  items-center justify-center mt-2">
+                <Pagination
+                    total={getAllAds?.meta?.total}
+                    pageSize={getAllAds?.meta?.limit}
+                    onChange={(page) => setPage(page)}
+                />
+            </div>
             <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle} addData={addData} />
 
             <EditAddModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} addData={addData} />

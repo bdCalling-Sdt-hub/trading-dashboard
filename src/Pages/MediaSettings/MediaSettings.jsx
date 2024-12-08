@@ -8,11 +8,10 @@ import { useGetAllAdsQuery, useGetAllVideosQuery } from "../../redux/Api/MediaSe
 import EditAddModal from "../../Components/EditAddModal";
 
 const MediaSettings = () => {
-
+    const [page, setPage] = useState(1)
     /** all APIs */
-    const { data: getAllAds } = useGetAllAdsQuery();
+    const { data: getAllAds } = useGetAllAdsQuery({page : page});
     const { data: getAllVideos } = useGetAllVideosQuery()
-
 
 
     const [ads, setAds] = useState(true)
@@ -65,7 +64,7 @@ const MediaSettings = () => {
 
 
             {
-                ads ? <MediaSettingTable getAllAds={getAllAds} /> : <MediaSettingVideoTable getAllVideos={getAllVideos} />
+                ads ? <MediaSettingTable getAllAds={getAllAds} setPage={setPage} /> : <MediaSettingVideoTable getAllVideos={getAllVideos} />
             }
 
 

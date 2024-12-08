@@ -3,9 +3,9 @@ import { baseApi } from "./baseApi";
 const mediaSettingApi = baseApi.injectEndpoints({
     endpoints  :(builder)=>({
         getAllAds  :builder.query({
-            query :()=>{
+            query :({page})=>{
                 return {
-                    url : '/adds/all-adds',
+                    url : `/adds/all-adds?page=${page}`,
                     method : 'GET'
                 }
             },
