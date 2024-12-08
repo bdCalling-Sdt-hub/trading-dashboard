@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { LoadingOutlined } from "@ant-design/icons";
 // eslint-disable-next-line react/prop-types
 const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
+    const [form] = Form.useForm()
     const [createAds, { isLoading }] = useCreateAdsMutation()
     const [fileList, setFileList] = useState([]);
     const [isPrivate, setIsPrivate] = useState()
@@ -15,7 +16,6 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
 
 
     const onFinish = (value) => {
-        console.log(value);
         const formData = new FormData();
         formData.append('image', fileList[0].originFileObj)
         formData.append('isPrivate', isPrivate)
@@ -61,13 +61,17 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
             open={openAddModal}
             centered
             footer={false}
-            onCancel={() => setOpenAddModal(false)}
+            onCancel={() =>{
+                setOpenAddModal(false)
+                form.resetFields()
+            }}
         >
             <div>
                 <p className='text-xl text-center py-2 font-semibold'>{modalTitle}</p>
                 <Form className=''
                     layout='vertical'
                     onFinish={onFinish}
+                    form={form}
                 >
 
 

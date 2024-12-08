@@ -7,14 +7,22 @@ import { MdCheck } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
 import { imageUrl } from "../../redux/Api/baseApi";
+import { useDeleteVideoAdsMutation } from "../../redux/Api/MediaSettingApi";
+import { toast } from "sonner";
 const MediaSettingVideoTable = ({ getAllVideos }) => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
-
+    const [deleteVideo] = useDeleteVideoAdsMutation()
 
     const handelEditVideo = () => {
         setModalTitle('Edit')
         setOpenAddModal(true)
+    }
+
+    const handleDeleteVideo =(id)=>{
+        deleteVideo(id).unwrap()
+        .then((payload) => toast.success(payload?.message))
+        .catch((error) => toast.error(error?.data?.message));
     }
 
 
@@ -78,7 +86,8 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
                     {/* Replace the action content with what you need, for example, icons */}
                     <a href="#edit" onClick={() => handelEditVideo()} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
                     <Popconfirm
-                    title ="Are you sure to delete this video?"
+                        title="Are you sure to delete this video?"
+                        onConfirm={()=>handleDeleteVideo(record?.id)}
                     >
 
                         <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
@@ -87,12 +96,11 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             ),
         },
     ];
-    console.log(columns);
 
-    console.log(getAllVideos?.data);
     // Columns data
     const formattedTableData = getAllVideos?.data?.map((video, i) => {
         return {
+            id: video?._id,
             key: i + 1,
             changeOrder: i + 1,
             imageUrl: img,
