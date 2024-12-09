@@ -5,15 +5,12 @@ import MediaSettingModal from "../../Components/MediaSettingModal/MediaSettingMo
 import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTable";
 import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/MediaSettingVideoTable";
 import { useGetAllAdsQuery, useGetAllVideosQuery } from "../../redux/Api/MediaSettingApi";
-import EditAddModal from "../../Components/EditAddModal";
 
 const MediaSettings = () => {
     const [page, setPage] = useState(1)
     /** all APIs */
     const { data: getAllAds } = useGetAllAdsQuery({page : page});
     const { data: getAllVideos } = useGetAllVideosQuery()
-
-
     const [ads, setAds] = useState(true)
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')

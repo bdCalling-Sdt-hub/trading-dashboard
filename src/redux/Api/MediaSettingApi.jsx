@@ -47,8 +47,18 @@ const mediaSettingApi = baseApi.injectEndpoints({
                 }
             },
             invalidatesTags : ['videoAds']
+        }),
+        updateAdds  :  builder.mutation({
+            query : ({id, data})=>{
+                console.log(id);
+                return {
+                    url : `/adds/edit-adds/${id}`,
+                    method : 'PATCH',
+                    body: data
+                }
+            },invalidatesTags : ['ads']
         })
     })
 })
 
-export const {useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation , useDeleteAdsMutation , useDeleteVideoAdsMutation} = mediaSettingApi;
+export const {useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation , useDeleteAdsMutation , useDeleteVideoAdsMutation , useUpdateAddsMutation} = mediaSettingApi;

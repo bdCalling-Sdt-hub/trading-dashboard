@@ -13,11 +13,14 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
     const [deleteVideo] = useDeleteVideoAdsMutation()
+    const [editData, setEditData] = useState()
 
-    const handelEditVideo = () => {
+    const handelEditVideo = (record) => {
         setModalTitle('Edit')
         setOpenAddModal(true)
+        setEditData(record);
     }
+    console.log(editData);
 
     const handleDeleteVideo =(id)=>{
         deleteVideo(id).unwrap()
@@ -84,7 +87,7 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             render: (text, record) => (
                 <div className="flex items-center gap-2">
                     {/* Replace the action content with what you need, for example, icons */}
-                    <a href="#edit" onClick={() => handelEditVideo()} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
+                    <a href="#edit" onClick={() => handelEditVideo(record)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
                     <Popconfirm
                         title="Are you sure to delete this video?"
                         onConfirm={()=>handleDeleteVideo(record?.id)}
@@ -126,7 +129,7 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
                 pagination={false}
 
             />
-            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle} />
+            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle}  />
 
 
 

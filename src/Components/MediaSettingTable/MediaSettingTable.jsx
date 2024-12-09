@@ -2,22 +2,20 @@ import { Pagination, Popconfirm, Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdCheck } from "react-icons/md";
-import { IoMdClose } from "react-icons/io";
 import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
 import { imageUrl } from "../../redux/Api/baseApi";
 import { useDeleteAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import EditAddModal from "../EditAddModal";
+import { MdCheck } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
 const MediaSettingTable = ({ getAllAds, setPage }) => {
-    console.log(getAllAds?.meta);
     const currentPage = getAllAds?.meta?.page || 1; 
     const pageSize = getAllAds?.meta?.limit || 10;
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
     const [deleteAds] = useDeleteAdsMutation()
     const [addData, setAddData] = useState()
-
     const handleEditAds = (record) => {
         setOpenAddModal(true)
         setModalTitle('Edit')
@@ -53,13 +51,23 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
             title: 'Active',
             dataIndex: 'active',
             key: 'active',
+            render : (_, record)=>(
+                <div>
+                   {record?.active ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
+                </div>
+            )
 
-        },
+        }, 
         {
             title: 'Private',
             dataIndex: 'private',
             key: 'private',
-
+            render : (_, record)=>(
+                <div>
+                   {record?.private ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
+                </div>
+            )
+            
         },
         {
             title: 'URL',
@@ -99,8 +107,8 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
             changeOrder: serialNumber,
             imageUrl: `${imageUrl}${add?.image}`,
             viewOrder: add?.order,
-            active: add?.isActive ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />,
-            private: add?.isPrivate ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />,
+            active: add?.isActive ,
+            private: add?.isPrivate,
             url: add?.url
         }
     })

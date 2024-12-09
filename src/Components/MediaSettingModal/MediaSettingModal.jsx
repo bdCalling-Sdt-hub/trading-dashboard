@@ -2,7 +2,7 @@ import { Checkbox, Form, Input, Modal, Select, Spin, Upload } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import { TbCopyCheck } from "react-icons/tb";
 import { PlusOutlined } from '@ant-design/icons';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCreateAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import { LoadingOutlined } from "@ant-design/icons";
