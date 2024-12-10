@@ -13,7 +13,7 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
     const [fileList, setFileList] = useState([]);
     const [isPrivate, setIsPrivate] = useState()
     const [isActive, setIsActive] = useState()
-    console.log(addData);
+    // console.log(addData);
     useEffect(() => {
         if (addData) {
             const fileList = addData.imageUrl
@@ -39,8 +39,7 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
     const onFinish = (values) => {
         const id = addData?.key
         const formData = new FormData();
-        console.log(values?.image);
-        if(fileList?.length){
+        if(fileList){
             formData.append('image' ,fileList)
         }
         formData.append("order",values?.viewOrder)
