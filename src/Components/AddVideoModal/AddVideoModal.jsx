@@ -14,7 +14,6 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
     const [isActive, setIsActive] = useState(false);
 
     const onFinish = (values) => {
-        console.log(values);
         const formData = new FormData();
         formData.append('video', fileList[0].originFileObj)
         formData.append('isPrivate', isPrivate)
@@ -42,7 +41,6 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
         setFileList(
             newFileList.map((file) => {
                 if (file.originFileObj) {
-                    // Generate video thumbnail
                     const videoUrl = URL.createObjectURL(file.originFileObj);
                     const videoElement = document.createElement('video');
                     videoElement.src = videoUrl;
@@ -64,6 +62,7 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
             })
         );
     };
+
 
     const handleRemove = (file) => {
         setFileList(fileList.filter((item) => item.uid !== file.uid));

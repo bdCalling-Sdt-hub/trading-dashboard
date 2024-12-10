@@ -5,33 +5,48 @@ import img1 from '../assets/images/dollar_gold.png'
 import img2 from '../assets/images/dollar_green.png'
 import TransactionTable from "../Components/TranstactionTable/TransactionTable"
 import { Link } from "react-router-dom"
+import { useTotalIncomeQuery, useTransactionHistoryQuery } from "../redux/Api/dashboardApi"
 
 const Income = () => {
+    const { data: getTotalIncome } = useTotalIncomeQuery()
+    const { data: getTransaction } = useTransactionHistoryQuery()
+    console.log(getTransaction?.data);
+
+    const formattedTableData = getTransaction?.data?.map((user, i) => {
+        return {
+            key: i+1,
+            name: user?.user?.name,
+            Membership_Type: user?.plan_id?.plan_type,
+            Date_Of_Payment: user?.createdAt?.split('T')[0],
+            Payment_Type: user?.payment_method,
+            // Payment_Status: "paid",
+            Paid_Amount: `$ ${user?.amount}`
+        }
+    })
 
     const IncomeItems = [
         {
             BalanceName: 'Total Balance',
-            totalBalance: 2584.54,
+            totalBalance: getTotalIncome?.data?.totalIncome,
             img: img2,
             color: '#3475F1'
 
         },
         {
             BalanceName: 'Gold-Earned',
-            totalBalance: 1245.42,
+            totalBalance: getTotalIncome?.data?.planIncome[0]?.totalIncome,
             img: img1,
             color: '#FAA316'
-
         },
         {
             BalanceName: 'Platinum-Earned',
-            totalBalance: 2584.54,
+            totalBalance: getTotalIncome?.data?.planIncome[1]?.totalIncome,
             img: img1,
             color: '#676767'
         },
         {
             BalanceName: 'Diamond-Earned',
-            totalBalance: 2584.54,
+            totalBalance: getTotalIncome?.data?.planIncome[2]?.totalIncome,
             img: img1,
             color: '#77A3F6'
         },
@@ -43,7 +58,7 @@ const Income = () => {
                 <div className="flex items-center">
                     <BsArrowLeftShort />
                     Total Income</div>
-                <div>
+                {/* <div>
                     <div className="relative">
                         <input
                             type="text"
@@ -55,7 +70,7 @@ const Income = () => {
                             <CiSearch />
                         </span>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Income Card Section */}
@@ -72,12 +87,12 @@ const Income = () => {
 
                 <div className="flex justify-between items-center">
                     <h1 className="font-semibold text-[20px]">Transaction History</h1>
-                    <Link to={`/transaction-history`}>
+                    {/* <Link to={`/transaction-history`}>
                     <p className="border-b cursor-pointer text-[12px] border-[#4E4E4E] text-[#4E4E4E]">View All</p>
-                    </Link>
+                    </Link> */}
                 </div>
                 {/* Transaction Table */}
-                <TransactionTable pagination={false} />
+                <TransactionTable pagination={false} formattedTableData={formattedTableData} />
             </div>
 
 

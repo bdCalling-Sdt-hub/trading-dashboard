@@ -180,9 +180,28 @@ const useApi = baseApi.injectEndpoints({
                 }
             }
         }),
+
+
+        // Income page apis
+        totalIncome : builder.query({
+            query : ()=>{
+                return {
+                    url : '/payment/incomes-totals',
+                    method : 'GET'
+                }
+            }
+        }),
+        transactionHistory : builder.query({
+            query :  ()=>{
+                return {
+                    url : "/payment/transitions-history",
+                    method : "GET"
+                }
+            }
+        })
         
 
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useTotalIncomeQuery , useTransactionHistoryQuery} = useApi

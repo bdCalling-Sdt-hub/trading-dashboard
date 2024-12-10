@@ -35,11 +35,11 @@ const columns = [
     dataIndex: 'Payment_Type',
     key: 'Payment_Type',
   },
-  {
-    title: 'Payment Status',
-    dataIndex: 'Payment_Status',
-    key: 'Payment_Status',
-  },
+  // {
+  //   title: 'Payment Status',
+  //   dataIndex: 'Payment_Status',
+  //   key: 'Payment_Status',
+  // },
   {
     title: 'Paid Amount',
     dataIndex: 'Paid_Amount',
@@ -47,40 +47,12 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: '#12333',
-    name: 'John Brown',
-    Membership_Type: "Gold",
-    Date_Of_Payment: "12/06/24",
-    Payment_Type: "Online Payment",
-    Payment_Status: "paid",
-    Paid_Amount: "$19.99"
-  },
-  {
-    key: '#12333',
-    name: 'Jim Green',
-    Membership_Type: "Platinum",
-    Date_Of_Payment: "12/06/24",
-    Payment_Type: "Online Payment",
-    Payment_Status: "paid",
-    Paid_Amount: "$19.99"
 
 
-  },
-  {
-    key: '#12333',
-    name: 'Joe Black',
-    Membership_Type: "Gold",
-    Date_Of_Payment: "12/06/24",
-    Payment_Type: "Online Payment",
-    Payment_Status: "paid",
-    Paid_Amount: "$19.99"
-
-
-  },
-];
-
-const TransactionTable = ({pagination}) => <Table columns={columns} dataSource={data} pagination={pagination} className="custom-pagination" />;
+const TransactionTable = ({pagination , formattedTableData}) => {
+  return (
+    <Table columns={columns} dataSource={formattedTableData} pagination={pagination} className="custom-pagination" />
+  )
+};
 
 export default TransactionTable;

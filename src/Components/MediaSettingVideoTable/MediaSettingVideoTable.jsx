@@ -2,19 +2,19 @@ import { Popconfirm, Table } from "antd";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import img from '../../assets/images/adsVideo.png'
 import { MdCheck } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
-import MediaSettingModal from "../MediaSettingModal/MediaSettingModal";
 import { imageUrl } from "../../redux/Api/baseApi";
 import { useDeleteVideoAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
+import EditVideoModal from "../EditVideoModal/EditVideoModal";
 const MediaSettingVideoTable = ({ getAllVideos }) => {
     const [openAddModal, setOpenAddModal] = useState(false)
+    
     const [modalTitle, setModalTitle] = useState('')
     const [deleteVideo] = useDeleteVideoAdsMutation()
     const [editData, setEditData] = useState()
-
+    // console.log(editData);
     const handelEditVideo = (record) => {
         setModalTitle('Edit')
         setOpenAddModal(true)
@@ -63,13 +63,19 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             title: 'Active',
             dataIndex: 'active',
             key: 'active',
-
+            render : (_, record)=>(
+                    record?.active ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />
+                
+            )
         },
         {
             title: 'Private',
             dataIndex: 'private',
             key: 'private',
-
+            render : (_, record)=>(
+                record?.private ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />
+            
+        )
         },
         {
             title: 'URL',
@@ -99,17 +105,17 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
         },
     ];
 
+
     // Columns data
     const formattedTableData = getAllVideos?.data?.map((video, i) => {
         return {
             id: video?._id,
             key: i + 1,
-            changeOrder: i + 1,
-            imageUrl: img,
+            changeOrder: video?.order,
             viewOrder: video?.order,
             video: video?.video,
-            active: video?.isActive ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />,
-            private: video?.isPrivate ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />,
+            active: video?.isActive ,
+            private: video?.isPrivate,
             url: video?.url
         }
     })
@@ -128,9 +134,9 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
                 pagination={false}
 
             />
-            <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle}  />
+            {/* <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle}  /> */}
 
-
+        <EditVideoModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} editData={editData}  />
 
         </div>
     );
