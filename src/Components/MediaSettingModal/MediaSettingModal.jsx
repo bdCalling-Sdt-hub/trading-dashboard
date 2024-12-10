@@ -22,7 +22,6 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
         formData.append('isActive', isActive)
         formData.append('url', value?.Url)
         formData.append('order', value?.viewOrder)
-        console.log();
         createAds(formData).unwrap()
             .then((payload) => {
                 toast.success(payload?.message)
@@ -124,7 +123,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
                         <button disabled={isLoading} className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
                             {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
                         </button>
-                        <button onClick={()=> setOpenAddModal(false)} disabled={isLoading} className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
+                        <button type="button" onClick={()=> setOpenAddModal(false)} disabled={isLoading} className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
                             <RxCross2 /> Cancel
                         </button>
                     </div>

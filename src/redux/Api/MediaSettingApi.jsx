@@ -1,64 +1,74 @@
 import { baseApi } from "./baseApi";
 
 const mediaSettingApi = baseApi.injectEndpoints({
-    endpoints  :(builder)=>({
-        getAllAds  :builder.query({
-            query :({page})=>{
+    endpoints: (builder) => ({
+        getAllAds: builder.query({
+            query: ({ page }) => {
                 return {
-                    url : `/adds/all-adds?page=${page}`,
-                    method : 'GET'
+                    url: `/adds/all-adds?page=${page}`,
+                    method: 'GET'
                 }
             },
-            providesTags : ['ads']
+            providesTags: ['ads']
         }),
-        getAllVideos  :builder.query({
-            query :()=>{
+        getAllVideos: builder.query({
+            query: () => {
                 return {
-                    url : '/adds/all-video-adds',
-                    method : 'GET'
+                    url: '/adds/all-video-adds',
+                    method: 'GET'
                 }
             },
-            providesTags : ['videoAds']
+            providesTags: ['videoAds']
         }),
-        createAds : builder.mutation({
-            query : (data)=>{
+        createAds: builder.mutation({
+            query: (data) => {
                 return {
-                    url : '/adds/create-adds',
-                    method : 'POST',
-                    body : data
+                    url: '/adds/create-adds',
+                    method: 'POST',
+                    body: data
                 }
             },
-            invalidatesTags : ['ads']
+            invalidatesTags: ['ads']
         }),
-        deleteAds : builder.mutation({
-            query : (id)=>{
+        deleteAds: builder.mutation({
+            query: (id) => {
                 return {
-                    url : `/adds/delete-adds/${id}`,
-                    method : 'DELETE'
+                    url: `/adds/delete-adds/${id}`,
+                    method: 'DELETE'
                 }
             },
-            invalidatesTags : ['ads']
+            invalidatesTags: ['ads']
         }),
-        deleteVideoAds : builder.mutation({
-            query : (id)=>{
+        deleteVideoAds: builder.mutation({
+            query: (id) => {
                 return {
-                    url : `/adds/delete-video-adds/${id}`,
-                    method : 'DELETE'
+                    url: `/adds/delete-video-adds/${id}`,
+                    method: 'DELETE'
+                }
+            },
+            invalidatesTags: ['videoAds']
+        }),
+        updateAdds: builder.mutation({
+            query: ({ id, data }) => {
+                console.log(id);
+                return {
+                    url: `/adds/edit-adds/${id}`,
+                    method: 'PATCH',
+                    body: data
+                }
+            }, invalidatesTags: ['ads']
+        }),
+        addVideo: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/adds/create-video-adds',
+                    method: 'POST',
+                    body: data
                 }
             },
             invalidatesTags : ['videoAds']
-        }),
-        updateAdds  :  builder.mutation({
-            query : ({id, data})=>{
-                console.log(id);
-                return {
-                    url : `/adds/edit-adds/${id}`,
-                    method : 'PATCH',
-                    body: data
-                }
-            },invalidatesTags : ['ads']
         })
     })
 })
 
-export const {useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation , useDeleteAdsMutation , useDeleteVideoAdsMutation , useUpdateAddsMutation} = mediaSettingApi;
+export const { useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation, useDeleteAdsMutation, useDeleteVideoAdsMutation, useUpdateAddsMutation , useAddVideoMutation } = mediaSettingApi;

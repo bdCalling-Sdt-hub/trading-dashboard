@@ -5,8 +5,11 @@ import MediaSettingModal from "../../Components/MediaSettingModal/MediaSettingMo
 import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTable";
 import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/MediaSettingVideoTable";
 import { useGetAllAdsQuery, useGetAllVideosQuery } from "../../redux/Api/MediaSettingApi";
+import AddVideoModal from "../../Components/AddVideoModal/AddVideoModal";
 
 const MediaSettings = () => {
+    const [openVideoModal, setOpenVideoModal] =  useState(false)
+
     const [page, setPage] = useState(1)
     /** all APIs */
     const { data: getAllAds } = useGetAllAdsQuery({page : page});
@@ -50,7 +53,7 @@ const MediaSettings = () => {
                         ads ? <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
                             <FaPlus />
                             New Ads
-                        </button> : <button onClick={() => setOpenAddModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
+                        </button> : <button onClick={() => setOpenVideoModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
                             <FaPlus />
                             New Videos
                         </button>
@@ -72,6 +75,7 @@ const MediaSettings = () => {
             {/* Media setting Modal */}
             <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle} />
             {/* <EditAddModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal}  /> */}
+            <AddVideoModal setOpenVideoModal={setOpenVideoModal} openVideoModal={openVideoModal} />
         </div>
     );
 };

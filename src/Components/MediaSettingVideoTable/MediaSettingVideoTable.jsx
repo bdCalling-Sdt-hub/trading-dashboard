@@ -20,7 +20,6 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
         setOpenAddModal(true)
         setEditData(record);
     }
-    console.log(editData);
 
     const handleDeleteVideo =(id)=>{
         deleteVideo(id).unwrap()
