@@ -3,7 +3,7 @@ import { Checkbox, Form, Input, Modal, Upload } from 'antd';
 import React, { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TbCopyCheck } from 'react-icons/tb';
-import { useAddVideoMutation } from '../../redux/Api/MediaSettingApi';
+import { useAddVideoMutation, useUpdateVideoMutation } from '../../redux/Api/MediaSettingApi';
 import { toast } from 'sonner';
 
 const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
@@ -44,18 +44,17 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
                     const videoUrl = URL.createObjectURL(file.originFileObj);
                     const videoElement = document.createElement('video');
                     videoElement.src = videoUrl;
-                    videoElement.currentTime = 1; // Seek to 1 second for the thumbnail
+                    videoElement.currentTime = 1;
 
                     videoElement.addEventListener('loadeddata', () => {
                         const canvas = document.createElement('canvas');
                         canvas.width = 150;
-                        canvas.height = 90; // Set the desired thumbnail dimensions
+                        canvas.height = 90; 
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-                        // Replace the preview thumbnail with the generated thumbnail
                         file.thumbUrl = canvas.toDataURL();
-                        setFileList([...newFileList]); // Update the fileList
+                        setFileList([...newFileList]); 
                     });
                 }
                 return file;

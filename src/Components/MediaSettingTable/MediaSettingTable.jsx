@@ -83,7 +83,6 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
             // eslint-disable-next-line no-unused-vars
             render: (text, record) => (
                 <div className="flex items-center gap-2">
-                    {/* Replace the action content with what you need, for example, icons */}
                     <a href="#edit" onClick={() => handleEditAds(record)} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
                     <Popconfirm
                         placement="topRight"

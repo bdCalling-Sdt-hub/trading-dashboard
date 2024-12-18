@@ -2,11 +2,9 @@ import { Form, Input, Modal, Select } from "antd"
 import { useEffect } from "react"
 import { RxCross2 } from "react-icons/rx"
 import { TbCopyCheck } from "react-icons/tb"
-import { useUpdateSubscriptionMutation } from "../../redux/Api/subscription"
 import { toast } from "sonner"
 
 const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) => {
-    const [updateSubscription] = useUpdateSubscriptionMutation()
     const [form] = Form.useForm()
     const onFinish = (value) => {
         // console.log(value)
@@ -105,7 +103,7 @@ const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) =>
 
 
 
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center justify-center gap-2'>
                         <button className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
                             <TbCopyCheck /> save
                         </button>

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TbCopyCheck } from 'react-icons/tb';
 import { toast } from 'sonner';
+import { useUpdateVideoMutation } from '../../redux/Api/MediaSettingApi';
+import { imageUrl } from '../../redux/Api/baseApi';
 
 const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
     const [form] = Form.useForm();
@@ -11,79 +13,93 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
     const [isPrivate, setIsPrivate] = useState(false);
     const [isActive, setIsActive] = useState(false);
 
+    const [updateEditVideo] = useUpdateVideoMutation();
+
     // Populate the form and state when editing existing data
     useEffect(() => {
         if (editData) {
-            const initialFileList = [];
+            // if (editData?.video) {
+            //     const videoElement = document.createElement('video');
+            //     videoElement.crossOrigin = 'anonymous';
+            //     videoElement.src = `${imageUrl}${editData.video}`;
+            //     console.log(videoElement.src);
+            //     videoElement.addEventListener('loadeddata', () => {
+            //         const canvas = document.createElement('canvas');
+            //         canvas.width = 150; // Thumbnail width
+            //         canvas.height = 90; // Thumbnail height
+            //         const ctx = canvas.getContext('2d');
+    
+            //         // Wait for the video to load enough data to render a frame
+            //         videoElement.currentTime = 1; // Capture frame at 1 second
+            //         videoElement.onseeked = () => {
+            //             ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+    
+            //             const thumbnailUrl = canvas.toDataURL(); // Convert to Base64
+    
+            //             // Update fileList with the generated thumbnail
+            //             setFileList([
+            //                 {
+            //                     uid: '-1',
+            //                     name: 'video-thumbnail.png',
+            //                     status: 'done',
+            //                     url: thumbnailUrl, // Use the generated thumbnail
+            //                 },
+            //             ]);
+            //         };
+            //     });
+            // }
 
-            if (editData.video) {
-                const videoElement = document.createElement('video');
-                videoElement.src = editData.video;
-
-                videoElement.addEventListener('loadeddata', () => {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = 150; // Thumbnail width
-                    canvas.height = 90; // Thumbnail height
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-                    const thumbnailUrl = canvas.toDataURL();
-
-                    setFileList([
-                        {
-                            uid: '-1',
-                            name: 'video-thumbnail.png',
-                            status: 'done',
-                            url: thumbnailUrl, // Generated thumbnail
-                        },
-                    ]);
-                });
-            }
             setIsPrivate(editData?.private || false);
             setIsActive(editData?.active || false);
             form.setFieldsValue({
+                // video : `${imageUrl}${editData?.video}`,
                 viewOrder: editData?.changeOrder || '',
                 url: editData?.url || '',
             });
         }
     }, [editData, form]);
 
-
     // Handle form submission
     const onFinish = (values) => {
-        console.log(values);
-        // const formData = new FormData();
-        // if (fileList.length && fileList[0]?.originFileObj) {
-        //     formData.append('image', fileList[0].originFileObj);
-        // }
-        // formData.append('order', values.viewOrder || '');
-        // formData.append('url', values.url || '');
-        // formData.append('isPrivate', isPrivate);
-        // formData.append('isActive', isActive);
+        const formData = new FormData();
+        if (fileList.length && fileList[0]?.originFileObj) {
+            formData.append('video', fileList[0].originFileObj);
+        }
 
+        formData.append('order', values.viewOrder || '');
+        formData.append('url', values.url || '');
+        formData.append('isPrivate', isPrivate);
+        formData.append('isActive', isActive);
 
+        updateEditVideo({ id: editData?.id, formData })
+            .unwrap()
+            .then((payload) => {
+                toast.success(payload?.message);
+                setOpenAddModal(false);
+            })
+            .catch((error) => toast.error(error?.data?.message));
     };
 
     // Handle file upload
     const handleUploadChange = ({ fileList: newFileList }) => {
         setFileList(
+
             newFileList.map((file) => {
                 if (file.originFileObj) {
-                    // Generate video thumbnail
                     const videoUrl = URL.createObjectURL(file.originFileObj);
                     const videoElement = document.createElement('video');
                     videoElement.src = videoUrl;
-                    videoElement.currentTime = 1; // Seek to 1 second for the thumbnail
+                    videoElement.currentTime = 1;
 
                     videoElement.addEventListener('loadeddata', () => {
                         const canvas = document.createElement('canvas');
                         canvas.width = 150;
-                        canvas.height = 90; // Set the desired thumbnail dimensions
+                        canvas.height = 90;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-                        // Replace the preview thumbnail with the generated thumbnail
                         file.thumbUrl = canvas.toDataURL();
-                        setFileList([...newFileList]); // Update the fileList
+                        setFileList([...newFileList]);
                     });
                 }
                 return file;
@@ -165,9 +181,9 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                             maxCount={1}
                         >
                             {fileList.length < 1 && (
-                                <div className='flex items-center gap-2'>
+                                <div className="flex items-center gap-2">
                                     <PlusOutlined />
-                                    <div>Add Video</div>
+                                    <div>Upload New Video</div>
                                 </div>
                             )}
                         </Upload>

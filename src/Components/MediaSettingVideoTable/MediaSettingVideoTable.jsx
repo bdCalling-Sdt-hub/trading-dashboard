@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import EditVideoModal from "../EditVideoModal/EditVideoModal";
 const MediaSettingVideoTable = ({ getAllVideos }) => {
     const [openAddModal, setOpenAddModal] = useState(false)
+    console.log(getAllVideos);
     
     const [modalTitle, setModalTitle] = useState('')
     const [deleteVideo] = useDeleteVideoAdsMutation()

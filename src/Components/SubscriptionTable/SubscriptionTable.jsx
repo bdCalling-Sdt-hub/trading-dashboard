@@ -19,7 +19,8 @@ const SubscriptionTable = () => {
     const {data : getAllSubscription} = useAllSubscriptionQuery()
     const [openAddModal, setOpenAddModal] = useState(false)
 
-    const formattedTableData = getAllSubscription?.data?.map((plan, i)=>{
+
+    const formattedTableData = getAllSubscription?.data?.subscriptions?.map((plan, i)=>{
         return {
             id : plan?._id,
             key: i + 1,
