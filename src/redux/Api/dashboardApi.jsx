@@ -17,6 +17,15 @@ const useApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        getSubscriptionGrowth : builder.query({
+            query : (year)=>{
+                console.log(year);
+                return {
+                    url : `/dashboard/subscription-growth?year=${year}`,
+                    method : 'GET'
+                }
+            }
+        }),
         planSubscriber: builder.query({
             query: () => {
                 return {
@@ -204,4 +213,4 @@ const useApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useTotalIncomeQuery , useTransactionHistoryQuery} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useTotalIncomeQuery , useTransactionHistoryQuery , useGetSubscriptionGrowthQuery} = useApi

@@ -1,6 +1,8 @@
 
 import { Select } from 'antd';
+import { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useGetSubscriptionGrowthQuery } from '../../redux/Api/dashboardApi';
 const data = [
     {
         name: 'Jan',
@@ -53,28 +55,46 @@ const data = [
         mt: 100,
     },
 ];
-const items = [
-    {
-        label: 2023,
-        key: "2023",
-    },
-    {
-        label: 2024,
-        key: "2024",
-    },
-    {
-        label: 2025,
-        key: "2025",
-    },
-    {
-        label: 2026,
-        key: "2026",
-    },
-];
+
 const SubscriptionGrowth = () => {
+    const [year, setYear] = useState('2024')
+    const {data : getSubscription} =  useGetSubscriptionGrowthQuery(year)
+    // console.log(getSubscription?.data?.data);
+    console.log(getSubscription);
+
+
+    
+    const data = getSubscription?.data?.data?.map((subscription)=>{
+        return (
+               { 
+                name: subscription?.month,
+                uv: subscription?.count,
+            }
+        )
+    })
+       
     const handleChange = (value) => {
-        console.log(`selected ${value}`);
+        setYear(value);
     };
+    const items = [
+
+        {
+            label: 2024,
+            value: "2024",
+        },
+        {
+            label: 2025,
+            value: "2025",
+        },
+        {
+            label: 2026,
+            value: "2026",
+        },
+        {
+            label: 2027,
+            value: "2027",
+        },
+    ];
     return (
         <>
             <div className='between-center'>

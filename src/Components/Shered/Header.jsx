@@ -8,7 +8,6 @@ const Header = () => {
     const { data: getUserInfo,isError, isLoading } = useGetProfileQuery();
     const navigate = useNavigate()
 
-    console.log(getUserInfo?.data?.result?.name);
     return (
         <div className='w-full py-4 bg-[var(--color-8)] end-center  gap-4'>
             <div onClick={() => navigate('/notification')}>
