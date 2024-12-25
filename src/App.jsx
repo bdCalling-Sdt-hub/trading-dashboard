@@ -39,7 +39,7 @@ function App() {
     {
       title: 'Total Income',
       icon : income,
-      count: allUser?.data?.totalIncome,
+      count: allUser?.data?.totalIncome?.toFixed(2),
     },
     {
       title: 'Gold User',

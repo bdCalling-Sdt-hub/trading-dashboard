@@ -15,7 +15,7 @@ const Profile = () => {
     const { data: getProfile } = useGetProfileQuery()
     const [updateProfile, { isLoading }] = useUpdateProfileMutation()
     const [changePassword, { isLoading: changePasswordLoading }] = useChangePasswordMutation()
-    
+
     const navigate = useNavigate()
 
     const [image, setImage] = useState();
@@ -57,20 +57,26 @@ const Profile = () => {
         if (image) {
             formData.append("profile_image", image);
         }
-        formData.append('name', values?.fullName)
-        formData.append('email', values?.email)
-        formData.append('phone_number', values?.mobileNumber)
-        formData.append('address', values?.address)
+        if (values?.fullName) {
+            formData.append('name', values?.fullName)
+        }
+        if (values?.mobileNumber) {
+            formData.append('phone_number', values?.mobileNumber)
+        }
+        if(values?.address){
+            formData.append('address', values?.address)
+
+        }
         updateProfile(formData).unwrap()
             .then((payload) => toast.success(payload?.message))
             .catch((error) => toast.error(error?.data?.message));
     }
     useEffect(() => {
         const data = {
-            fullName: getProfile?.data?.name,
-            email: getProfile?.data?.email,
-            mobileNumber: getProfile?.data?.phone_number,
-            address: getProfile?.data?.address
+            fullName: getProfile?.data?.result?.name,
+            email: getProfile?.data?.result?.email,
+            mobileNumber: getProfile?.data?.result?.phone_number,
+            address: getProfile?.data?.result?.address
         }
         form.setFieldsValue(data)
     }, [getProfile])
@@ -85,7 +91,7 @@ const Profile = () => {
                         <input type="file" onInput={handleChange} id='img' style={{ display: "none" }} />
                         <img
                             style={{ width: 140, height: 140, borderRadius: "100%" }}
-                            src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.profile_image}`}`}
+                            src={`${image ? URL.createObjectURL(image) : `${imageUrl}${getProfile?.data?.result?.profile_image}`}`}
                             alt=""
                             className="border-blue-500 border-2 shadow-2xl"
                         />
@@ -108,7 +114,7 @@ const Profile = () => {
 
                     </div>
                     <div className='w-fit'>
-                        <p className=' text-[#575757] text-[24px] leading-[32px] font-semibold  '>{getProfile?.data?.name}</p>
+                        <p className=' text-[#575757] text-[24px] leading-[32px] font-semibold  '>{getProfile?.data?.result?.name}</p>
                     </div>
                 </div>
 

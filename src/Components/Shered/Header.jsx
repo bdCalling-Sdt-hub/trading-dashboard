@@ -7,6 +7,8 @@ import { imageUrl } from '../../redux/Api/baseApi';
 const Header = () => {
     const { data: getUserInfo,isError, isLoading } = useGetProfileQuery();
     const navigate = useNavigate()
+
+    console.log(getUserInfo?.data?.result?.name);
     return (
         <div className='w-full py-4 bg-[var(--color-8)] end-center  gap-4'>
             <div onClick={() => navigate('/notification')}>
@@ -17,8 +19,8 @@ const Header = () => {
                 </Link>
             </div>
             <Link to={'/profile'} className='end-center gap-1 border-gray-400 p-[2px] px-4 rounded-md cursor-pointer'>
-                <img className='h-10 w-10 rounded-full object-cover shadow-md border-2' src={`${imageUrl}${getUserInfo?.data?.profile_image}`} alt="" />
-                <p className='font-medium text-white'>{getUserInfo?.data?.name || "Not available"}</p>
+                <img className='h-10 w-10 rounded-full object-cover shadow-md border-2' src={`${imageUrl}${getUserInfo?.data?.result?.profile_image}`} alt="" />
+                <p className='font-medium text-white'>{getUserInfo?.data?.result?.name || "Not available"}</p>
             </Link>
         </div>
     )
