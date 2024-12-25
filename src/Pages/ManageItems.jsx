@@ -11,6 +11,8 @@ import CategoryModal from '../Components/CategoryModal/CategoryModal';
 import { useGetAllCategoryQuery } from '../redux/Api/dashboardApi';
 import { useCreateSubCategoryMutation, useGetAllSubCategoryQuery } from '../redux/Api/subCategoryApi';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
+import { BsArrowLeftShort } from 'react-icons/bs';
 const { Option } = Select;
 const ManageItems = () => {
     const [openAddModal, setOpenAddModal] = useState(false)
@@ -59,7 +61,7 @@ const ManageItems = () => {
             <div className='  my-2 pt-5'>
                 <div className='start-center gap-2 mb-3 '>
 
-                    <p className='flex items-center gap-2'> <GoArrowLeft />Manage Items</p>
+                    <p className='flex items-center gap-2'><Link to={-1}><BsArrowLeftShort size={25} /></Link>Manage Items</p>
                 </div>
                 <div className='flex justify-between items-center'>
                     <div className='flex items-center gap-5'>

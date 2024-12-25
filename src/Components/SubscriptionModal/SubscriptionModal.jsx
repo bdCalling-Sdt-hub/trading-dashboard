@@ -3,9 +3,11 @@ import { useEffect } from "react"
 import { RxCross2 } from "react-icons/rx"
 import { TbCopyCheck } from "react-icons/tb"
 import { toast } from "sonner"
+import { useUpdateSubscriptionMutation } from "../../redux/Api/subscription"
 
 const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) => {
     const [form] = Form.useForm()
+    const  [updateSubscription] =  useUpdateSubscriptionMutation()
     const onFinish = (value) => {
         // console.log(value)
         const data = {

@@ -4,9 +4,11 @@ import { Link, useParams } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { MdOutlineLibraryAddCheck, } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
-import { useApproveDeclineMemberRequestMutation, useGetSingleSubscribePlanQuery } from "../redux/Api/dashboardApi";
+import { useApproveDeclineMemberRequestMutation, useDeclineMemberRequestMutation, useGetSingleSubscribePlanQuery } from "../redux/Api/dashboardApi";
 import { toast } from "sonner";
-import { Spin } from "antd";
+import { Form, Input, Modal, Spin } from "antd";
+import { useState } from "react";
+import TextArea from "antd/es/input/TextArea";
 
 
 
@@ -14,7 +16,9 @@ import { Spin } from "antd";
 
 
 const SingleUserDetails = () => {
-  const [approvedDecline , {isLoading  : loadingApprovedDecline}] = useApproveDeclineMemberRequestMutation()
+  const [openModal, setOpenModal] = useState(false)
+  const [approvedDecline, { isLoading: loadingApprovedDecline }] = useApproveDeclineMemberRequestMutation()
+  const [declineUser] = useDeclineMemberRequestMutation()
   const { id } = useParams()
 
   const { data: getSingleSubscriber, isLoading } = useGetSingleSubscribePlanQuery(id);
@@ -61,9 +65,24 @@ const SingleUserDetails = () => {
 
   /** Handle approved and delete request user */
   const handleUserRequest = (status) => {
-    approvedDecline({id, status }).unwrap()
+    approvedDecline({ id, status }).unwrap()
       .then((payload) => toast.success(payload?.message))
       .catch((error) => toast.error(error?.data?.message));
+
+  }
+
+
+  const handleDeclineUser = (value) => {
+    const status = 'decline'
+    // console.log(value);
+
+    declineUser({ id, status , value }).unwrap()
+    .then((payload) => {
+      console.log(payload);
+      toast.success(payload?.message)
+      setOpenModal(false)
+    })
+    .catch((error) => toast.error(error?.data?.message));
 
   }
 
@@ -161,15 +180,26 @@ const SingleUserDetails = () => {
         </div>
       </div>
       <div className="flex justify-center gap-4 mt-4 pb-5">
-        <button disabled={loadingApprovedDecline} onClick={() => handleUserRequest("approved")} className={`bg-blue-500 text-white py-1 px-4 rounded flex items-center gap-1 text-sm ${loadingApprovedDecline ? 'opacity-50 cursor-not-allowed' : ""}`}>
-          {loadingApprovedDecline ? 'Loading..': <><MdOutlineLibraryAddCheck /><span>Approved</span></>}
+        <button disabled={loadingApprovedDecline || getSingleSubscriber?.data?.status === "approved"} onClick={() => handleUserRequest("approved")} className={`bg-blue-500 text-white py-1 px-4 rounded flex items-center gap-1 text-sm ${getSingleSubscriber?.data?.status === "approved" && "cursor-not-allowed opacity-50"} ${loadingApprovedDecline ? 'opacity-50 cursor-not-allowed' : ""}`}>
+          {loadingApprovedDecline ? 'Loading..' : <><MdOutlineLibraryAddCheck /><span>Approved</span></>}
         </button>
 
         {/** todo list */}
-        <button className="bg-red-500 text-white py-1 px-4 rounded flex items-center text-sm">
+        <button onClick={() => setOpenModal(true)} disabled={getSingleSubscriber?.data?.status === "decline"} className={`bg-red-500 text-white py-1 px-4 rounded flex items-center text-sm  ${getSingleSubscriber?.data?.status === "decline"  && 'opacity-50 cursor-not-allowed'}`}>
           <IoMdClose /> <span>Decline</span>
         </button>
       </div>
+      <Modal centered footer={false} onCancel={() => setOpenModal(false)} open={openModal} >
+        <p className="text-md mb-2">Send Decline Reason</p>
+        <Form onFinish={handleDeclineUser}>
+          <Form.Item name={'reason'}>
+            <TextArea rows={4}></TextArea>
+          </Form.Item>
+          <div className="flex items-center justify-center">
+            <button className="bg-blue-500 text-white px-5 py-2 rounded-md">Send</button>
+          </div>
+        </Form>
+      </Modal>
     </div>
   );
 };

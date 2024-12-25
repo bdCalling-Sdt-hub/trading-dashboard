@@ -56,7 +56,7 @@ const Income = () => {
 
             <div className="flex justify-between item-center ">
                 <div className="flex items-center">
-                    <BsArrowLeftShort />
+                    <Link to={-1}><BsArrowLeftShort size={25} /></Link>
                     Total Income</div>
                 {/* <div>
                     <div className="relative">

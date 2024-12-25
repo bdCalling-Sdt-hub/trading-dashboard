@@ -2,6 +2,7 @@ import { BsArrowLeftShort } from "react-icons/bs"
 import { CiSearch } from "react-icons/ci"
 import UserDetailsTable from "../Components/UserDetailsTable/UserDetailsTable"
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 
@@ -11,7 +12,7 @@ const UserDetails = () => {
         <div className="p-2 shadow-md">
             <div className="flex justify-between item-center ">
                 <div className="flex items-center gap-2">
-                    <BsArrowLeftShort />
+                   <Link to={-1}><BsArrowLeftShort size={25} /></Link>
                     User Details</div>
                 <div>
                     <div className="relative">

@@ -60,7 +60,11 @@ const Notification = () => {
     return (
         <div>
             <div className="flex justify-between items-center gap-4">
-                <h3 className="text-[#242424] text-[20px] font-semibold flex items-center gap-2"> <IoArrowBackSharp />Notifications</h3>
+                <button
+                    className="text-[#242424] text-[20px] font-semibold flex items-center gap-2"
+                >
+                    Notifications
+                </button>
 
             </div>
             <div>

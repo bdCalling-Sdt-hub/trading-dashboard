@@ -1,10 +1,12 @@
-import { Table } from "antd";
+import { Pagination, Table } from "antd";
 import { MdBlockFlipped } from "react-icons/md";
 import { useBlockUserMutation, useGetAllUserQuery } from "../../redux/Api/dashboardApi";
 import { imageUrl } from "../../redux/Api/baseApi";
 import { toast } from "sonner";
+import { useState } from "react";
 const UserDetailsTable = ({ search }) => {
-    const { data: getAllUser, isLoading } = useGetAllUserQuery({ search })
+    const [page, setPage] = useState(1)
+    const { data: getAllUser, isLoading } = useGetAllUserQuery({ search, page })
     const [blockUser] = useBlockUserMutation()
     const columns = [
         {
@@ -70,9 +72,12 @@ const UserDetailsTable = ({ search }) => {
     }
 
     const formattedTableData = getAllUser?.data?.map((user, i) => {
+        const currentPage = getAllUser?.meta?.page || 1;
+        const limit = getAllUser?.meta?.limit || 10;
+        const sno = (currentPage - 1) * limit + i + 1;
         return {
             key: user?._id,
-            sno: i + 1,
+            sno: sno,
             name: user?.name,
             img: `${imageUrl}${user?.profile_image}`,
             memberSince: user?.createdAt?.split("T")[0],
@@ -80,7 +85,7 @@ const UserDetailsTable = ({ search }) => {
             email: user?.email,
             contactNumber: user?.phone_number,
             location: user?.address || 'Not Available',
-            isBlock : user?.is_block
+            isBlock: user?.is_block
         }
     })
 
@@ -96,17 +101,16 @@ const UserDetailsTable = ({ search }) => {
             <Table
                 columns={columns}
                 dataSource={formattedTableData}
-                pagination={{
-                    pageSize: 5,
-                    showTotal: (total, range) => `Showing ${range[0]}-${range[1]} out of ${total}`,
-                    locale: {
-                        items_per_page: '',
-                        prev_page: 'Previous',
-                        next_page: 'Next',
-                    },
-                }}
+                pagination={false}
                 className="custom-pagination"
             />
+            <div className="flex justify-center mt-4">
+                <Pagination
+                    onChange={page => setPage(page)}
+                    pageSize={getAllUser?.meta?.limit}
+                    total={getAllUser?.meta?.total}
+                />
+            </div>
 
         </div>
     )

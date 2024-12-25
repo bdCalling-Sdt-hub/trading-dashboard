@@ -1,6 +1,7 @@
 import { Table } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+import { imageUrl } from "../../redux/Api/baseApi";
 
 
 const JoinRequest = ({tableData}) => {
@@ -19,7 +20,7 @@ const JoinRequest = ({tableData}) => {
         return (
           <div className="start-center gap-2">
             <img
-              src={record?.img}
+              src={`${imageUrl}${record?.img}`}
               className="w-[40px] h-[40px] rounded-[8px]"
               alt=""
             />

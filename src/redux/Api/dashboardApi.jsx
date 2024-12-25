@@ -91,6 +91,15 @@ const useApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        declineMemberRequest: builder.mutation({
+            query: ({ id, status ,value }) => {
+                return {
+                    url: `/plan/subscribe/${id}/request?status=${status}`,
+                    method: 'PATCH',
+                    body : value
+                }
+            }
+        }),
         /** Get all Notification */
         getAllNotification: builder.query({
             query: () => {
@@ -113,9 +122,9 @@ const useApi = baseApi.injectEndpoints({
         }),
         /** Get all user */
         getAllUser : builder.query({
-            query : ({search})=>{
+            query : ({page,search})=>{
                 return {
-                    url : `/auth/users?searchTerm=${search}`,
+                    url : `/auth/users?page=${page}&searchTerm=${search}`,
                     method : 'GET'
                 }
             },
@@ -213,4 +222,4 @@ const useApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useTotalIncomeQuery , useTransactionHistoryQuery , useGetSubscriptionGrowthQuery} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useTotalIncomeQuery , useTransactionHistoryQuery , useGetSubscriptionGrowthQuery , useDeclineMemberRequestMutation} = useApi

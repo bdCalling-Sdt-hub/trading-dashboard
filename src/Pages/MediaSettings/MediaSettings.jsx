@@ -6,6 +6,8 @@ import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTa
 import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/MediaSettingVideoTable";
 import { useGetAllAdsQuery, useGetAllVideosQuery } from "../../redux/Api/MediaSettingApi";
 import AddVideoModal from "../../Components/AddVideoModal/AddVideoModal";
+import { Link } from "react-router-dom";
+import { BsArrowLeftShort } from "react-icons/bs";
 
 const MediaSettings = () => {
     const [openVideoModal, setOpenVideoModal] =  useState(false)
@@ -30,11 +32,11 @@ const MediaSettings = () => {
     }
 
     return (
-        <div className='rounded-md'>
-            <div className='  my-2 pt-5'>
+        <div className='rounded-md shadow-md p-4'>
+            <div className='  my-2'>
                 <div className='start-center gap-2 mb-3 p-5'>
 
-                    <p className='flex items-center gap-2'> <GoArrowLeft />Media Settings</p>
+                    <p className='flex items-center gap-2'><Link to={-1}><BsArrowLeftShort size={25} /></Link>Media Settings</p>
                 </div>
                 <div className='flex justify-between items-center'>
                     {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
