@@ -81,7 +81,7 @@ const useApi = baseApi.injectEndpoints({
                     method: 'GET'
                 }
             },
-            invalidatesTags: ['allCategory']
+            providesTags: ['subscriber']
         }),
         approveDeclineMemberRequest: builder.mutation({
             query: ({ id, status }) => {
@@ -89,7 +89,8 @@ const useApi = baseApi.injectEndpoints({
                     url: `/plan/subscribe/${id}/request?status=${status}`,
                     method: 'PATCH'
                 }
-            }
+            },
+            invalidatesTags : ['subscriber']
         }),
         declineMemberRequest: builder.mutation({
             query: ({ id, status ,value }) => {

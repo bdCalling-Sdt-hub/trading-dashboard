@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: "192.168.10.26",
+    host: "138.197.37.38",
     port: "3002",
   },
 });

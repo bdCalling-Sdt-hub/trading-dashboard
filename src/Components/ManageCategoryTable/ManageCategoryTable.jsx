@@ -87,6 +87,7 @@ const ManageCategoryTable = () => {
     ))
 
 
+
     const handleEditCategory = (values) => {
         const id = editData?.key
         console.log(values?.name);

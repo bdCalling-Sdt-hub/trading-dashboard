@@ -24,6 +24,8 @@ const Income = () => {
         }
     })
 
+    console.log(getTotalIncome?.data);
+
     const IncomeItems = [
         {
             BalanceName: 'Total Balance',

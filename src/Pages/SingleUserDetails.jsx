@@ -22,6 +22,7 @@ const SingleUserDetails = () => {
   const { id } = useParams()
 
   const { data: getSingleSubscriber, isLoading } = useGetSingleSubscribePlanQuery(id);
+  // console.log(getSingleSubscriber?.data?.place_of_birth);
 
   const userDetails = [
     { "label": "Name", "value": `${getSingleSubscriber?.data?.name}` },
@@ -85,6 +86,7 @@ const SingleUserDetails = () => {
     .catch((error) => toast.error(error?.data?.message));
 
   }
+
 
   return (
 
