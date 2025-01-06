@@ -6,6 +6,7 @@ import { toast } from "sonner"
 import { useUpdateSubscriptionMutation } from "../../redux/Api/subscription"
 
 const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) => {
+
     const [form] = Form.useForm()
     const  [updateSubscription] =  useUpdateSubscriptionMutation()
     const onFinish = (value) => {
@@ -13,12 +14,11 @@ const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) =>
         const data = {
             "planName": value?.SubscriptionPlan,
             "fee": value?.MembershipFeePerMonth,
-            // "pointRangeStart":0,
             "pointRangeEnd": value?.pointRange,
             "swapPoint": value?.PointEarnPerSwap,
             "positiveCommentPoint": value?.PointLosePerPositiveComment,
             "negativeCommentPoint": value?.PointLosePerNegativeComment,
-            // "duration":""
+            "productPriceLimit" : value?.productPriceLimit
 
         }
         const id = singlePlanData?.id
@@ -32,6 +32,7 @@ const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) =>
     }
 
 
+
     useEffect(() => {
         if (singlePlanData) {
             form.setFieldsValue({
@@ -41,6 +42,7 @@ const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) =>
                 PointEarnPerSwap: singlePlanData?.pointsPerSwap,
                 PointLosePerPositiveComment: singlePlanData?.pointsPerPositiveComment,
                 PointLosePerNegativeComment: singlePlanData?.pointsPerNegativeComment,
+                productPriceLimit : singlePlanData?.productPriceLimit
             });
         }
     }, [singlePlanData])
@@ -54,7 +56,7 @@ const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) =>
             onCancel={() => setOpenAddModal(false)}
         >
             <div>
-                <p className='text-xl text-center py-2 font-semibold'>Edit</p>
+                <p className='text-xl text-center py-2 font-semibold'>Editss</p>
                 <Form className=''
                     layout='vertical'
                     onFinish={onFinish}
@@ -101,6 +103,13 @@ const SubscriptionModal = ({ openAddModal, setOpenAddModal, singlePlanData }) =>
 
                     >
                         <Input className=' border outline-none' placeholder='10' />
+                    </Form.Item>
+                    <Form.Item
+                        name={`productPriceLimit`}
+                        label={`product Price Limit`}
+
+                    >
+                        <Input className='border outline-none' placeholder='' />
                     </Form.Item>
 
 

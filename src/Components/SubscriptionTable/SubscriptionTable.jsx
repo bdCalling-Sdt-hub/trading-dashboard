@@ -29,7 +29,8 @@ const SubscriptionTable = () => {
             pointsRange: plan?.pointRangeEnd,
             pointsPerSwap: `${plan?.swapPoint}`,
             pointsPerPositiveComment: plan?.positiveCommentPoint,
-            pointsPerNegativeComment: plan?.negativeCommentPoint,  
+            pointsPerNegativeComment: plan?.negativeCommentPoint,
+            productPriceLimit : plan?.productPriceLimit  
         }
     })
 
