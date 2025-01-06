@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { useGetUserGrowthQuery } from '../../redux/Api/dashboardApi';
 
 const Overview = () => {
-    const [year, setYear] = useState('2024')
+    const [year, setYear] = useState('2025')
     /**user growth API */
     const {data  : getUserGrowth} = useGetUserGrowthQuery(year);
     const chartData =  getUserGrowth?.data?.data?.map(data =>(

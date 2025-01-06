@@ -77,6 +77,7 @@ const ManageCategoryTable = () => {
 
     /** Category data */
     const dataTable = getAllCategory?.data?.map((category, i) => (
+       
         {
             key: category?._id,
             sno: i + 1,
@@ -85,6 +86,7 @@ const ManageCategoryTable = () => {
 
         }
     ))
+    console.log(getAllCategory?.data);
 
 
 

@@ -57,7 +57,7 @@ const data = [
 ];
 
 const SubscriptionGrowth = () => {
-    const [year, setYear] = useState('2024')
+    const [year, setYear] = useState('2025')
     const {data : getSubscription} =  useGetSubscriptionGrowthQuery(year)
 
 

@@ -4,6 +4,7 @@ import { useBlockUserMutation, useGetAllUserQuery } from "../../redux/Api/dashbo
 import { imageUrl } from "../../redux/Api/baseApi";
 import { toast } from "sonner";
 import { useState } from "react";
+import { FaRegUser } from "react-icons/fa";
 const UserDetailsTable = ({ search }) => {
     const [page, setPage] = useState(1)
     const { data: getAllUser, isLoading } = useGetAllUserQuery({ search, page })
@@ -20,9 +21,9 @@ const UserDetailsTable = ({ search }) => {
             key: 'name',
             render: (text, record) => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={record?.img} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
-                    {text}
-                </div>
+                <img src={record?.img} alt="user" style={{ width: 30, height: 30, marginRight: 8 }} />
+                {text}
+            </div> 
             ),
         },
         {
@@ -75,6 +76,7 @@ const UserDetailsTable = ({ search }) => {
         const currentPage = getAllUser?.meta?.page || 1;
         const limit = getAllUser?.meta?.limit || 10;
         const sno = (currentPage - 1) * limit + i + 1;
+        console.log(user?.profile_image);
         return {
             key: user?._id,
             sno: sno,
