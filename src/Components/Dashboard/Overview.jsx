@@ -43,7 +43,7 @@ const Overview = () => {
             <div className='between-center'>
                 <p className='text-2xl'>User Growth</p>
                 <Select
-                    defaultValue="2024"
+                    defaultValue="2025"
                     style={{ width: 120 }}
                     onChange={handleChange}
                     options={items}

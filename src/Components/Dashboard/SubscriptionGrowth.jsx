@@ -76,6 +76,7 @@ const SubscriptionGrowth = () => {
     };
     const items = [
 
+
         {
             label: 2024,
             value: "2024",
@@ -98,7 +99,7 @@ const SubscriptionGrowth = () => {
             <div className='between-center'>
                 <p className='text-2xl'>Subscription Growth</p>
                 <Select
-                    defaultValue="2024"
+                    defaultValue="2025"
                     style={{ width: 120 }}
                     onChange={handleChange}
                     options={items}
