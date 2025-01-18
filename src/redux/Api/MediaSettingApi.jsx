@@ -20,6 +20,34 @@ const mediaSettingApi = baseApi.injectEndpoints({
             },
             providesTags: ['videoAds']
         }),
+        getSecondVideo : builder.query({
+            query : ()=>{
+                return {
+                   url : '/adds/get-small-banner?limit=100',
+                   method : 'GET' 
+                }
+            },
+            providesTags : ['secondVideo']
+        }),
+        createSecondVideo: builder.mutation({
+            query: (data) => {
+                return {
+                    url: '/adds/create-small-banner',
+                    method: 'POST',
+                    body: data
+                }
+            },
+            invalidatesTags: ['secondVideo']
+        }),
+        deleteSecondVideo: builder.mutation({
+            query: (id) => {
+                return {
+                    url: `/adds/delete-small-banner/${id}`,
+                    method: 'DELETE'
+                }
+            },
+            invalidatesTags: ['secondVideo']
+        }),
         createAds: builder.mutation({
             query: (data) => {
                 return {
@@ -82,4 +110,4 @@ const mediaSettingApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation, useDeleteAdsMutation, useDeleteVideoAdsMutation, useUpdateAddsMutation , useAddVideoMutation , useUpdateVideoMutation } = mediaSettingApi;
+export const { useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation, useDeleteAdsMutation, useDeleteVideoAdsMutation, useUpdateAddsMutation , useAddVideoMutation , useUpdateVideoMutation , useGetSecondVideoQuery , useCreateSecondVideoMutation , useDeleteSecondVideoMutation} = mediaSettingApi;

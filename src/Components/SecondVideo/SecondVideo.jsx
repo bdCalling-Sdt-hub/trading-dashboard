@@ -5,16 +5,15 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdCheck } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
 import { imageUrl } from "../../redux/Api/baseApi";
-import { useDeleteVideoAdsMutation } from "../../redux/Api/MediaSettingApi";
+import { useDeleteSecondVideoMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import EditVideoModal from "../EditVideoModal/EditVideoModal";
-const MediaSettingVideoTable = ({ getAllVideos }) => {
+const SecondVideo = ({ getAllVideos }) => {
     const [openAddModal, setOpenAddModal] = useState(false)
     
     const [modalTitle, setModalTitle] = useState('')
-    const [deleteVideo] = useDeleteVideoAdsMutation()
+    const [deleteVideo] = useDeleteSecondVideoMutation()
     const [editData, setEditData] = useState()
-    // console.log(editData);
     const handelEditVideo = (record) => {
         setModalTitle('Edit')
         setOpenAddModal(true)
@@ -134,20 +133,12 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             key: i + 1,
             changeOrder: video?.order,
             viewOrder: video?.order,
-            video: video?.video,
+            video: video?.files,
             active: video?.isActive ,
             private: video?.isPrivate,
             url: video?.url
         }
     })
-
-
-
-
-
-
-
-
     return (
         <div className="p-2 ">
 
@@ -163,4 +154,4 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
     );
 };
 
-export default MediaSettingVideoTable;
+export default SecondVideo;
