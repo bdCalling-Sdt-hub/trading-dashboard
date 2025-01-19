@@ -20,6 +20,7 @@ const MediaSettings = () => {
     const { data: getAllAds } = useGetAllAdsQuery({page : page});
     const { data: getAllVideos } = useGetAllVideosQuery()
     const { data : getSecondVideo} = useGetSecondVideoQuery()
+    console.log(getSecondVideo);
     const [ads, setAds] = useState("ads")
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')

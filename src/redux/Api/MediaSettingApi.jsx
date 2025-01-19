@@ -48,6 +48,17 @@ const mediaSettingApi = baseApi.injectEndpoints({
             },
             invalidatesTags: ['secondVideo']
         }),
+        updateSecondVideo : builder.mutation({
+            query : ({id,formData})=>{
+                console.log(formData)
+                return {
+                    url : `/adds/edit-video-adds/${id}`,
+                    method :  "PATCH",
+                    body : formData
+                }
+            },
+            invalidatesTags : ['secondVideo']
+        }),
         createAds: builder.mutation({
             query: (data) => {
                 return {
@@ -110,4 +121,4 @@ const mediaSettingApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation, useDeleteAdsMutation, useDeleteVideoAdsMutation, useUpdateAddsMutation , useAddVideoMutation , useUpdateVideoMutation , useGetSecondVideoQuery , useCreateSecondVideoMutation , useDeleteSecondVideoMutation} = mediaSettingApi;
+export const { useGetAllAdsQuery, useGetAllVideosQuery, useCreateAdsMutation, useDeleteAdsMutation, useDeleteVideoAdsMutation, useUpdateAddsMutation , useAddVideoMutation , useUpdateVideoMutation , useGetSecondVideoQuery , useCreateSecondVideoMutation , useDeleteSecondVideoMutation , useUpdateSecondVideoMutation} = mediaSettingApi;

@@ -11,7 +11,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
     const [form] = Form.useForm()
     const [createAds, { isLoading }] = useCreateAdsMutation()
     const [fileList, setFileList] = useState([]);
-    const [isPrivate, setIsPrivate] = useState()
+    const [isPrivate, setIsPrivate] = useState(false)
     const [isActive, setIsActive] = useState()
 
 
@@ -26,6 +26,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
             .then((payload) => {
                 toast.success(payload?.message)
                 setOpenAddModal(false)
+                form.resetFields()
             })
             .catch((error) => toast.error(error?.data?.message));
     }

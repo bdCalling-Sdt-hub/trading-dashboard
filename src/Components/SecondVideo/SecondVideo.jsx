@@ -8,6 +8,7 @@ import { imageUrl } from "../../redux/Api/baseApi";
 import { useDeleteSecondVideoMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import EditVideoModal from "../EditVideoModal/EditVideoModal";
+import EditSecondVideoModal from "../EditSecondVideoModal/EditSecondVideoModal";
 const SecondVideo = ({ getAllVideos }) => {
     const [openAddModal, setOpenAddModal] = useState(false)
     
@@ -148,7 +149,8 @@ const SecondVideo = ({ getAllVideos }) => {
             />
             {/* <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle}  /> */}
 
-        <EditVideoModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} editData={editData}  />
+        <EditVideoModal  />
+        <EditSecondVideoModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} editData={editData} />
 
         </div>
     );

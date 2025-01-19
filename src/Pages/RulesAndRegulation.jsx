@@ -23,7 +23,7 @@ const RulesAndRegulation = () => {
         readonly: false,
         placeholder: 'Start typings...',
         style: {
-            height: 400,
+            height: 600,
         },
         buttons: [
             'image', 'fontsize', 'bold', 'italic', 'underline', '|',
