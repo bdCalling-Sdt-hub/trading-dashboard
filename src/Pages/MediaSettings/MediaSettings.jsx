@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
-import { GoArrowLeft } from "react-icons/go";
 import MediaSettingModal from "../../Components/MediaSettingModal/MediaSettingModal";
 import MediaSettingTable from "../../Components/MediaSettingTable/MediaSettingTable";
 import MediaSettingVideoTable from "../../Components/MediaSettingVideoTable/MediaSettingVideoTable";
@@ -20,11 +19,9 @@ const MediaSettings = () => {
     const { data: getAllAds } = useGetAllAdsQuery({page : page});
     const { data: getAllVideos } = useGetAllVideosQuery()
     const { data : getSecondVideo} = useGetSecondVideoQuery()
-    console.log(getSecondVideo);
     const [ads, setAds] = useState("ads")
     const [openAddModal, setOpenAddModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
-    // const [openCategoryModal, setOpenCategoryModal] = useState(false)
 
 
     const handleAdsModal = () => {

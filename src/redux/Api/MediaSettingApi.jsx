@@ -109,7 +109,6 @@ const mediaSettingApi = baseApi.injectEndpoints({
         }),
         updateVideo : builder.mutation({
             query : ({id,formData})=>{
-                console.log(formData)
                 return {
                     url : `/adds/edit-video-adds/${id}`,
                     method :  "PATCH",

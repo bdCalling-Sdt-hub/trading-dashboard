@@ -14,18 +14,28 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
     const [isActive, setIsActive] = useState(false);
 
     const onFinish = (values) => {
-        const formData = new FormData();
-        formData.append('video', fileList[0].originFileObj)
-        formData.append('isPrivate', isPrivate)
-        formData.append('isActive', isActive)
-        formData.append('url', values?.Url)
-        formData.append('order', values?.viewOrder)
-        addVideo(formData).unwrap()
+
+        console.log(values);
+        // const formData = new FormData();
+        // formData.append('video', fileList[0].originFileObj)
+        // formData.append('isPrivate', isPrivate)
+        // formData.append('isActive', isActive)
+        // formData.append('url', values?.Url)
+        // formData.append('order', values?.viewOrder)
+        const data = {
+            isPrivate,
+            isActive ,
+            url :  values?.Url,
+            order : values?.viewOrder 
+        }
+        addVideo(data).unwrap()
             .then((payload) => {
                 toast.success(payload?.message)
                 setOpenVideoModal(false)
             })
             .catch((error) => toast.error(error?.data?.message));
+
+        
     };
 
     // Checkbox value
@@ -114,7 +124,7 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
                         By making a video private, it will be visible only to selected members.
                     </p>
 
-                    <Form.Item name="video" label="Video">
+                    {/* <Form.Item name="video" label="Video">
                         <Upload
                             listType="picture-card"
                             onChange={handleUploadChange}
@@ -131,7 +141,7 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
                                 </div>
                             )}
                         </Upload>
-                    </Form.Item>
+                    </Form.Item> */}
 
                     <div className="flex justify-center items-center gap-2">
                         <button

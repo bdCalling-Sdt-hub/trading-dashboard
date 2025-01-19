@@ -61,15 +61,22 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
 
     // Handle form submission
     const onFinish = (values) => {
-        const formData = new FormData();
-        if (fileList.length && fileList[0]?.originFileObj) {
-            formData.append('video', fileList[0].originFileObj);
+        // const formData = new FormData();
+        // if (fileList.length && fileList[0]?.originFileObj) {
+        //     formData.append('video', fileList[0].originFileObj);
+        // }
+
+        const formData = {
+            order : values?.viewOrder ,
+            url :  values?.url,
+            isPrivate : isPrivate,
+            isActive, isActive
         }
 
-        formData.append('order', values.viewOrder || '');
-        formData.append('url', values.url || '');
-        formData.append('isPrivate', isPrivate);
-        formData.append('isActive', isActive);
+        // formData.append('order', values.viewOrder || '');
+        // formData.append('url', values.url || '');
+        // formData.append('isPrivate', isPrivate);
+        // formData.append('isActive', isActive);
 
         updateEditVideo({ id: editData?.id, formData })
             .unwrap()
@@ -166,7 +173,7 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                         By making the video private, it will only be visible to selected members.
                     </p>
 
-                    <Form.Item
+                    {/* <Form.Item
                         name="video"
                         label="Video Thumbnail"
                         valuePropName="fileList"
@@ -187,7 +194,7 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                                 </div>
                             )}
                         </Upload>
-                    </Form.Item>
+                    </Form.Item> */}
 
                     <div className="flex justify-center gap-4">
                         <button

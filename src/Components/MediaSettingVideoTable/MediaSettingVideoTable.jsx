@@ -34,46 +34,46 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             dataIndex: 'changeOrder',
             key: 'changeOrder',
         },
-        {
-            title: 'Video',
-            dataIndex: 'imageUrl',
-            key: 'image',
-            render: (text, record) => {
-                const fileUrl = record?.video || '';
-                const fileExtension = fileUrl.split('.').pop().toLowerCase();
+        // {
+        //     title: 'Video',
+        //     dataIndex: 'imageUrl',
+        //     key: 'image',
+        //     render: (text, record) => {
+        //         const fileUrl = record?.video || '';
+        //         const fileExtension = fileUrl.split('.').pop().toLowerCase();
         
-                // Check if it's an image
-                const isImage = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'].includes(fileExtension);
+        //         // Check if it's an image
+        //         const isImage = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'].includes(fileExtension);
         
-                // Check if it's a video
-                const isVideo = ['mp4', 'webm', 'ogg', 'mov', 'avi', 'mkv'].includes(fileExtension);
+        //         // Check if it's a video
+        //         const isVideo = ['mp4', 'webm', 'ogg', 'mov', 'avi', 'mkv'].includes(fileExtension);
         
-                if (!fileUrl) {
-                    return <span>No media available</span>;
-                }
+        //         if (!fileUrl) {
+        //             return <span>No media available</span>;
+        //         }
         
-                if (isImage) {
-                    return (
-                        <img
-                            src={`${imageUrl}${fileUrl}`}
-                            alt="Image"
-                            style={{ width: 50, height: 50 }}
-                        />
-                    );
-                } else if (isVideo) {
-                    return (
-                        <video
-                            src={`${imageUrl}${fileUrl}`}
-                            style={{ width: 50, height: 50 }}
-                            controls={false}
-                            muted
-                        />
-                    );
-                } else {
-                    return <span>Unsupported media type</span>;
-                }
-            }
-        },
+        //         if (isImage) {
+        //             return (
+        //                 <img
+        //                     src={`${imageUrl}${fileUrl}`}
+        //                     alt="Image"
+        //                     style={{ width: 50, height: 50 }}
+        //                 />
+        //             );
+        //         } else if (isVideo) {
+        //             return (
+        //                 <video
+        //                     src={`${imageUrl}${fileUrl}`}
+        //                     style={{ width: 50, height: 50 }}
+        //                     controls={false}
+        //                     muted
+        //                 />
+        //             );
+        //         } else {
+        //             return <span>Unsupported media type</span>;
+        //         }
+        //     }
+        // },
         {
             title: 'View Order',
             dataIndex: 'viewOrder',
@@ -134,7 +134,7 @@ const MediaSettingVideoTable = ({ getAllVideos }) => {
             key: i + 1,
             changeOrder: video?.order,
             viewOrder: video?.order,
-            video: video?.video,
+            // video: video?.video,
             active: video?.isActive ,
             private: video?.isPrivate,
             url: video?.url
