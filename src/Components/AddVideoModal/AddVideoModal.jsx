@@ -1,13 +1,13 @@
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Checkbox, Form, Input, Modal, Upload } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Checkbox, Form, Input, Modal, Spin } from 'antd';
 import React, { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TbCopyCheck } from 'react-icons/tb';
-import { useAddVideoMutation, useUpdateVideoMutation } from '../../redux/Api/MediaSettingApi';
+import { useAddVideoMutation } from '../../redux/Api/MediaSettingApi';
 import { toast } from 'sonner';
 
 const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
-    const [addVideo] = useAddVideoMutation()
+    const [addVideo , {isLoading}] = useAddVideoMutation()
     const [form] = Form.useForm();
     const [fileList, setFileList] = useState([]);
     const [isPrivate, setIsPrivate] = useState(false);
@@ -15,7 +15,6 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
 
     const onFinish = (values) => {
 
-        console.log(values);
         // const formData = new FormData();
         // formData.append('video', fileList[0].originFileObj)
         // formData.append('isPrivate', isPrivate)
@@ -148,7 +147,7 @@ const AddVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
                             className="flex items-center gap-1 py-2 px-4 bg-[#3475F1] text-white font-semibold rounded-sm"
                             type="submit"
                         >
-                            <TbCopyCheck /> Save
+                           {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
                         </button>
                         <button
                             type="button"

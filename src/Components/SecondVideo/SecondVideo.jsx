@@ -31,8 +31,8 @@ const SecondVideo = ({ getAllVideos }) => {
     const columns = [
         {
             title: 'Sl No',
-            dataIndex: 'changeOrder',
-            key: 'changeOrder',
+            dataIndex: 'key',
+            key: 'key',
         },
         {
             title: 'Video',

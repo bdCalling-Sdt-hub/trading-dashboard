@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://backend.swiftswapp.com',
     // baseUrl: 'http://10.0.60.37:5071/',
+    // baseUrl: 'http://10.0.60.118:5071',
     prepareHeaders: (headers) => {
         const token = JSON.parse(localStorage.getItem('token'));
         if (token) {
@@ -20,5 +21,6 @@ export const baseApi = createApi({
 });
 
 
+// export const imageUrl = 'http://10.0.60.118:5071'
 // export const imageUrl = 'http://10.0.60.37:5071/'
 export const imageUrl = 'https://backend.swiftswapp.com'

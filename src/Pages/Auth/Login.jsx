@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Skeleton, Spin } from "antd";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -7,11 +7,15 @@ import { useLoginAdminMutation } from "../../redux/Api/userApi";
 import { toast } from "sonner";
 
 const Login = () => {
-    const [loginAdmin] = useLoginAdminMutation()
+    const [loginAdmin , {isLoading}] = useLoginAdminMutation()
     const navigate = useNavigate();
 
     const onFinish = (values) => {
-        loginAdmin(values).unwrap()
+        const data = {
+            ...values,
+            password : values?.password?.trim()
+        }
+        loginAdmin(data).unwrap()
             .then((payload) => {
                 if(payload?.data?.user?.role === 'ADMIN'){
 
@@ -26,6 +30,9 @@ const Login = () => {
                 toast.error(error?.data?.message)
             });
     };
+    if(isLoading){
+        return <div className="flex items-center justify-center h-screen w-full"><Spin size="large" /></div>
+    }
 
     return (
         <div className="grid grid-cols-2 items-center h-[100vh]">

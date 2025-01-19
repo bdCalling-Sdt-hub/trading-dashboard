@@ -92,7 +92,6 @@ const ManageCategoryTable = () => {
 
     const handleEditCategory = (values) => {
         const id = editData?.key
-        console.log(values?.name);
         const formData = new FormData();
         if (!values?.name) {
             return toast.error('Please enter category name!');

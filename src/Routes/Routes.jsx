@@ -39,6 +39,7 @@ import Facts from "../Pages/Facts.jsx";
 import TransactionHistory from "../Pages/TransactionHistory.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import PrivateLogin from "./PrivateLogin.jsx";
+import Reporting from "../Pages/Reporting/Reporting.jsx";
 // import Otp from "../Pages/Auth/Otp.jsx";
 
 
@@ -109,6 +110,10 @@ export const router = createBrowserRouter([
                 path: '/profile',
                 element: <Profile />,
             }, 
+            {
+                path : 'reporting',
+                element : <Reporting/>
+            },
             // {
             //     path: '/create-project',
             //     element: <CreateProject />,

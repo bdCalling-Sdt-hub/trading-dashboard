@@ -18,6 +18,8 @@ import cat2 from '../../assets/images/item_cat.png'
 import media2 from '../../assets/images/media_color.png'
 import setting2 from '../../assets/images/setting_color.png'
 import logo  from "../../../src/assets/logo.png"
+import report from '../../assets/images/report.png'
+import report1 from '../../assets/images/report1.png'
 
 const Sidebar = () => {
     const [openIndex, setOpenIndex] = useState(null);
@@ -72,7 +74,13 @@ const Sidebar = () => {
             icon2: <img src={media2} />,
             sub_menu: false
         },
-
+        {
+            path : '/reporting',
+            label  :'Reporting',
+            icon: <img src={report} />,
+            icon2: <img src={report1} />,
+            sub_menu: false
+        },
 
         {
             path: '#',

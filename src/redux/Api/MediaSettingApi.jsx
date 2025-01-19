@@ -50,9 +50,8 @@ const mediaSettingApi = baseApi.injectEndpoints({
         }),
         updateSecondVideo : builder.mutation({
             query : ({id,formData})=>{
-                console.log(formData)
                 return {
-                    url : `/adds/edit-video-adds/${id}`,
+                    url : `/adds/edit-small-banner/${id}`,
                     method :  "PATCH",
                     body : formData
                 }

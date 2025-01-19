@@ -1,5 +1,5 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Checkbox, Form, Input, Modal, Upload } from 'antd';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { Checkbox, Form, Input, Modal, Spin, Upload } from 'antd';
 import React, { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TbCopyCheck } from 'react-icons/tb';
@@ -140,12 +140,13 @@ const AddSecondVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
                             className="flex items-center gap-1 py-2 px-4 bg-[#3475F1] text-white font-semibold rounded-sm"
                             type="submit"
                         >
-                            <TbCopyCheck /> Save
+                            {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
                         </button>
                         <button
                             type="button"
                             onClick={() => setOpenVideoModal(false)}
-                            className="py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm"
+                            disabled={isLoading}
+                            className={`py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm ${isLoading && "bg-red-300 cursor-not-allowed"}`}
                         >
                             <RxCross2 /> Cancel
                         </button>

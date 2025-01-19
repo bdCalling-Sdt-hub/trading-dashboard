@@ -39,6 +39,7 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
     const onFinish = (values) => {
         const id = addData?.key
         const formData = new FormData();
+        console.log(fileList);
         if(fileList){
             formData.append('image' ,fileList)
         }
@@ -71,7 +72,7 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
     };
 
     const handleRemove = (file) => {
-        setFileList(fileList.filter((item) => item.uid !== file.uid));
+        setFileList(fileList[0]?.originFileObj.filter((item) => item.uid !== file.uid));
     };
 
     return (
