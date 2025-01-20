@@ -1,5 +1,5 @@
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Checkbox, Form, Input, Modal, Upload } from 'antd';
+import { Checkbox, Form, Input, Modal, Spin, Upload } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TbCopyCheck } from 'react-icons/tb';
@@ -13,7 +13,7 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
     const [isPrivate, setIsPrivate] = useState(false);
     const [isActive, setIsActive] = useState(false);
 
-    const [updateEditVideo] = useUpdateVideoMutation();
+    const [updateEditVideo , {isLoading}] = useUpdateVideoMutation();
 
     // Populate the form and state when editing existing data
     useEffect(() => {
@@ -201,7 +201,7 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                             type="submit"
                             className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded"
                         >
-                            <TbCopyCheck /> Save
+                             {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
                         </button>
                         <button
                             type="button"

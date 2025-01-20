@@ -10,7 +10,6 @@ import { useTotalIncomeQuery, useTransactionHistoryQuery } from "../redux/Api/da
 const Income = () => {
     const { data: getTotalIncome } = useTotalIncomeQuery()
     const { data: getTransaction } = useTransactionHistoryQuery()
-    console.log(getTransaction?.data);
 
     const formattedTableData = getTransaction?.data?.map((user, i) => {
         return {
@@ -24,7 +23,6 @@ const Income = () => {
         }
     })
 
-    console.log(getTotalIncome?.data);
 
     const IncomeItems = [
         {

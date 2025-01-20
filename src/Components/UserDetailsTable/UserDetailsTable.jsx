@@ -76,7 +76,6 @@ const UserDetailsTable = ({ search }) => {
         const currentPage = getAllUser?.meta?.page || 1;
         const limit = getAllUser?.meta?.limit || 10;
         const sno = (currentPage - 1) * limit + i + 1;
-        console.log(user?.profile_image);
         return {
             key: user?._id,
             sno: sno,

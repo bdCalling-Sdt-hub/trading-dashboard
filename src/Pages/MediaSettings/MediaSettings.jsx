@@ -70,11 +70,14 @@ const MediaSettings = () => {
                         </button> 
                     }
                     {
-                        ads  === "video" &&  <button onClick={() => setOpenVideoModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
-                        <FaPlus />
-                        New Videos
-                    </button>
+                        getAllVideos?.data.length === 0 && (
+                            ads  === "video" &&  <button onClick={() => setOpenVideoModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
+                            <FaPlus />
+                            New Videos
+                        </button>
+                        )
                     }
+                    
                     {
                         ads  === "secondVideo" &&  <button onClick={() => setOpenSecondVideoModal(true)} className='bg-[#3475F1] px-4 rounded-sm start-center gap-1 py-2 text-white flex justify-center items-center whitespace-nowrap'>
                         <FaPlus />

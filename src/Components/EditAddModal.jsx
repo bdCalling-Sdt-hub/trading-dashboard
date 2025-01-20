@@ -13,7 +13,6 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
     const [fileList, setFileList] = useState([]);
     const [isPrivate, setIsPrivate] = useState()
     const [isActive, setIsActive] = useState()
-    // console.log(addData);
     useEffect(() => {
         if (addData) {
             const fileList = addData.imageUrl

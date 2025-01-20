@@ -86,7 +86,6 @@ const ManageCategoryTable = () => {
 
         }
     ))
-    console.log(getAllCategory?.data);
 
 
 
@@ -105,7 +104,6 @@ const ManageCategoryTable = () => {
             .then((payload) => {
                 toast.success(payload?.message)
                 setOpenEditModal(false)
-                console.log(payload);
             })
             .catch((error) => {
                 toast.error(error?.data?.message)
