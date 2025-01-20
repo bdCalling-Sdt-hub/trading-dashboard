@@ -83,7 +83,7 @@ const AddSecondVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
             <div>
                 <p className="text-xl text-center py-2 font-semibold">Add Second Video</p>
                 <Form className="" layout="vertical" onFinish={onFinish} form={form}>
-                    <Form.Item
+                    {/* <Form.Item
                         name="viewOrder"
                         label="View Order"
                         rules={[
@@ -94,10 +94,10 @@ const AddSecondVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
                         ]}
                     >
                         <Input />
-                    </Form.Item>
-                    <Checkbox className="my-2" onChange={handleIsActive}>
+                    </Form.Item> */}
+                    {/* <Checkbox className="my-2" onChange={handleIsActive}>
                         Active
-                    </Checkbox>
+                    </Checkbox> */}
 
                     <Form.Item
                         name="Url"
@@ -111,12 +111,12 @@ const AddSecondVideoModal = ({ openVideoModal, setOpenVideoModal }) => {
                     >
                         <Input className="border outline-none" placeholder="" />
                     </Form.Item>
-                    <Checkbox onChange={onChange}>Private</Checkbox>
+                    {/* <Checkbox onChange={onChange}>Private</Checkbox>
                     <p className="pb-5">
                         By making a video private, it will be visible only to selected members.
-                    </p>
+                    </p> */}
 
-                    <Form.Item name="video" label="Video">
+                    <Form.Item name="video" label="Video / Image">
                         <Upload
                             listType="picture-card"
                             onChange={handleUploadChange}

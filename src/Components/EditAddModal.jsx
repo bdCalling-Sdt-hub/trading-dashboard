@@ -110,7 +110,7 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
 
                     <Form.Item
                         name="image"
-                        label="Image"
+                        label="Image / Video"
                         valuePropName="fileList" 
                         getValueFromEvent={(e) => Array.isArray(e) ? e : e?.fileList}
                     >

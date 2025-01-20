@@ -105,7 +105,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
 
                     <Form.Item
                         name="image"
-                        label="Image"
+                        label="Image / Video"
                     >
                         <Upload
                             listType="picture-card"

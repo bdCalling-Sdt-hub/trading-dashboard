@@ -74,30 +74,30 @@ const SecondVideo = ({ getAllVideos }) => {
                 }
             }
         },
-        {
-            title: 'View Order',
-            dataIndex: 'viewOrder',
-            key: 'viewOrder',
+        // {
+        //     title: 'View Order',
+        //     dataIndex: 'viewOrder',
+        //     key: 'viewOrder',
 
-        },
-        {
-            title: 'Active',
-            dataIndex: 'active',
-            key: 'active',
-            render : (_, record)=>(
-                    record?.active ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />
+        // },
+        // {
+        //     title: 'Active',
+        //     dataIndex: 'active',
+        //     key: 'active',
+        //     render : (_, record)=>(
+        //             record?.active ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />
                 
-            )
-        },
-        {
-            title: 'Private',
-            dataIndex: 'private',
-            key: 'private',
-            render : (_, record)=>(
-                record?.private ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />
+        //     )
+        // },
+        // {
+        //     title: 'Private',
+        //     dataIndex: 'private',
+        //     key: 'private',
+        //     render : (_, record)=>(
+        //         record?.private ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />
             
-        )
-        },
+        // )
+        // },
         {
             title: 'URL',
             dataIndex: 'url',
@@ -132,11 +132,11 @@ const SecondVideo = ({ getAllVideos }) => {
         return {
             id: video?._id,
             key: i + 1,
-            changeOrder: video?.order,
-            viewOrder: video?.order,
+            // changeOrder: video?.order,
+            // viewOrder: video?.order,
             video: video?.files,
-            active: video?.isActive ,
-            private: video?.isPrivate,
+            // active: video?.isActive ,
+            // private: video?.isPrivate,
             url: video?.url
         }
     })
@@ -149,7 +149,7 @@ const SecondVideo = ({ getAllVideos }) => {
             />
             {/* <MediaSettingModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} modalTitle={modalTitle}  /> */}
 
-        <EditVideoModal  />
+        {/* <EditVideoModal  /> */}
         <EditSecondVideoModal openAddModal={openAddModal} setOpenAddModal={setOpenAddModal} editData={editData} />
 
         </div>

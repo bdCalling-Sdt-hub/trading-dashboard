@@ -55,7 +55,7 @@ const MediaSettings = () => {
                         </button>
                         <button onClick={() => handleVideoModal()} className={` ${ads === "video" ? 'bg-[#3475F1] text-white' : 'border border-[#3475F1] text-[#3475F1]'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
 
-                            Video
+                            Tutorial
                         </button>
                         <button onClick={() => handleSecondVideoModal()} className={` ${ads === "secondVideo" ? 'bg-[#3475F1] text-white' : 'border border-[#3475F1] text-[#3475F1]'}  px-4 rounded-sm start-center gap-1 py-2  flex justify-center items-center whitespace-nowrap`}>
 

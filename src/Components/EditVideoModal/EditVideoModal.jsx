@@ -67,10 +67,10 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
         // }
 
         const formData = {
-            order : values?.viewOrder ,
+            // order : values?.viewOrder ,
             url :  values?.url,
-            isPrivate : isPrivate,
-            isActive, isActive
+            // isPrivate : isPrivate,
+            // isActive, isActive
         }
 
         // formData.append('order', values.viewOrder || '');
@@ -138,21 +138,21 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
             <div>
                 <p className="text-xl text-center py-2 font-semibold">Edit Video</p>
                 <Form form={form} layout="vertical" onFinish={onFinish}>
-                    <Form.Item
+                    {/* <Form.Item
                         name="viewOrder"
                         label="View Order"
                         rules={[{ required: true, message: 'Please enter the view order' }]}
                     >
                         <Input placeholder="Enter view order" />
-                    </Form.Item>
+                    </Form.Item> */}
 
-                    <Checkbox
+                    {/* <Checkbox
                         checked={isActive}
                         onChange={(e) => setIsActive(e.target.checked)}
                         className="mb-4"
                     >
                         Active
-                    </Checkbox>
+                    </Checkbox> */}
 
                     <Form.Item
                         name="url"
@@ -162,7 +162,7 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                         <Input placeholder="Enter video URL" />
                     </Form.Item>
 
-                    <Checkbox
+                    {/* <Checkbox
                         checked={isPrivate}
                         onChange={(e) => setIsPrivate(e.target.checked)}
                         className="mb-4"
@@ -171,7 +171,7 @@ const EditVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                     </Checkbox>
                     <p className="pb-5 text-sm">
                         By making the video private, it will only be visible to selected members.
-                    </p>
+                    </p> */}
 
                     {/* <Form.Item
                         name="video"

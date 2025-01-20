@@ -132,21 +132,21 @@ const EditSecondVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
             <div>
                 <p className="text-xl text-center py-2 font-semibold">Edit Second Video</p>
                 <Form form={form} layout="vertical" onFinish={onFinish}>
-                    <Form.Item
+                    {/* <Form.Item
                         name="viewOrder"
                         label="View Order"
                         rules={[{ required: true, message: 'Please enter the view order' }]}
                     >
                         <Input placeholder="Enter view order" />
-                    </Form.Item>
+                    </Form.Item> */}
 
-                    <Checkbox
+                    {/* <Checkbox
                         checked={isActive}
                         onChange={(e) => setIsActive(e.target.checked)}
                         className="mb-4"
                     >
                         Active
-                    </Checkbox>
+                    </Checkbox> */}
 
                     <Form.Item
                         name="url"
@@ -156,16 +156,16 @@ const EditSecondVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                         <Input placeholder="Enter video URL" />
                     </Form.Item>
 
-                    <Checkbox
+                    {/* <Checkbox
                         checked={isPrivate}
                         onChange={(e) => setIsPrivate(e.target.checked)}
                         className="mb-4"
                     >
                         Private
-                    </Checkbox>
-                    <p className="pb-5 text-sm">
+                    </Checkbox> */}
+                    {/* <p className="pb-5 text-sm">
                         By making the video private, it will only be visible to selected members.
-                    </p>
+                    </p> */}
 
                     <Form.Item
                         name="files"
