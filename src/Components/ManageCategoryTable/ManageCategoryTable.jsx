@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Popconfirm, Table, Upload } from "antd";
+import { Form, Input, Modal, Popconfirm, Spin, Table, Upload } from "antd";
 import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -8,7 +8,7 @@ import { imageUrl } from "../../redux/Api/baseApi";
 import { toast } from "sonner";
 import { RxCross2 } from "react-icons/rx";
 import { TbCopyCheck } from "react-icons/tb";
-import { PlusOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 const ManageCategoryTable = () => {
     const [openAddModal, setOpenAddModal] = useState(false);
@@ -199,7 +199,8 @@ const ManageCategoryTable = () => {
 
                         <div className='flex justify-center items-center gap-2'>
                             <button className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
-                                <TbCopyCheck /> save
+                            {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
+
                             </button>
                             <button onClick={() => {
                                 setOpenEditModal(false)

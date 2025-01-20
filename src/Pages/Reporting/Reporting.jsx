@@ -1,5 +1,5 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button, Form, Modal, Pagination, Table } from "antd";
+import { Button, Form, Modal, Pagination, Popconfirm, Table } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useState } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -12,6 +12,8 @@ import {
 } from "../../redux/Api/ReportingApis";
 import { imageUrl } from "../../redux/Api/baseApi";
 import { toast } from "sonner";
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const Reporting = () => {
   const [page, setPage] = useState(1);
@@ -165,7 +167,22 @@ const Reporting = () => {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => <Button  onClick={()=> handleDeleteReport(record?.key)} type="text" icon={<DeleteOutlined />} />,
+      render: (text, record) => (
+        <div className="flex items-center gap-2">
+            <a href="#delete" onClick={() => {
+                
+            }} className="bg-[#3475F1] text-white p-1 rounded-md"><CiEdit size={20} /></a>
+            <Popconfirm
+                title="Delete the category!"
+                description="Are you sure to delete this category?"
+                okText="Yes"
+                cancelText="No"
+                onConfirm={() =>  handleDeleteReport(record?.key)}
+            >
+                <a href="#delete" className="bg-[#D9000A] text-white p-1 rounded-md"><RiDeleteBin6Line size={20} /></a>
+            </Popconfirm>
+        </div>
+    ),
     },
   ];
 
