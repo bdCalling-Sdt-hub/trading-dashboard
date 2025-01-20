@@ -41,34 +41,34 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
             key: 'ads',
             render: (text, record) => <img src={record.imageUrl} alt={record.name} style={{ width: 50, height: 50 }} />,
         },
-        {
-            title: 'View Order',
-            dataIndex: 'viewOrder',
-            key: 'viewOrder',
+        // {
+        //     title: 'View Order',
+        //     dataIndex: 'viewOrder',
+        //     key: 'viewOrder',
 
-        },
-        {
-            title: 'Active',
-            dataIndex: 'active',
-            key: 'active',
-            render : (_, record)=>(
-                <div>
-                   {record?.active ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
-                </div>
-            )
+        // },
+        // {
+        //     title: 'Active',
+        //     dataIndex: 'active',
+        //     key: 'active',
+        //     render : (_, record)=>(
+        //         <div>
+        //            {record?.active ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
+        //         </div>
+        //     )
 
-        }, 
-        {
-            title: 'Private',
-            dataIndex: 'private',
-            key: 'private',
-            render : (_, record)=>(
-                <div>
-                   {record?.private ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
-                </div>
-            )
+        // }, 
+        // {
+        //     title: 'Private',
+        //     dataIndex: 'private',
+        //     key: 'private',
+        //     render : (_, record)=>(
+        //         <div>
+        //            {record?.private ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
+        //         </div>
+        //     )
             
-        },
+        // },
         {
             title: 'URL',
             dataIndex: 'url',
@@ -105,9 +105,9 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
             key: add?._id,
             changeOrder: serialNumber,
             imageUrl: `${imageUrl}${add?.image}`,
-            viewOrder: add?.order,
-            active: add?.isActive ,
-            private: add?.isPrivate,
+            // viewOrder: add?.order,
+            // active: add?.isActive ,
+            // private: add?.isPrivate,
             url: add?.url
         }
     })

@@ -18,10 +18,10 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
     const onFinish = (value) => {
         const formData = new FormData();
         formData.append('image', fileList[0].originFileObj)
-        formData.append('isPrivate', isPrivate)
-        formData.append('isActive', isActive)
+        // formData.append('isPrivate', isPrivate)
+        // formData.append('isActive', isActive)
         formData.append('url', value?.Url)
-        formData.append('order', value?.viewOrder)
+        // formData.append('order', value?.viewOrder)
         createAds(formData).unwrap()
             .then((payload) => {
                 toast.success(payload?.message)
@@ -75,7 +75,7 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
                 >
 
 
-                    <Form.Item name={`viewOrder`}
+                    {/* <Form.Item name={`viewOrder`}
                         label={`View Order`}
                         rules={[
                             {
@@ -85,8 +85,8 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
                         ]}>
                         <Input />
 
-                    </Form.Item>
-                    <Checkbox className="my-2" onChange={handleIsActive} >Active</Checkbox>
+                    </Form.Item> */}
+                    {/* <Checkbox className="my-2" onChange={handleIsActive} >Active</Checkbox> */}
 
                     <Form.Item
                         name={`Url`}
@@ -100,8 +100,8 @@ const MediaSettingModal = ({ openAddModal, setOpenAddModal, modalTitle  }) => {
                     >
                         <Input className=' border outline-none' placeholder='' />
                     </Form.Item>
-                    <Checkbox onChange={onChange}>Private</Checkbox>
-                    <p className="pb-5">By making a video private, it will be visible only the selected members. </p>
+                    {/* <Checkbox onChange={onChange}>Private</Checkbox> */}
+                    {/* <p className="pb-5">By making a video private, it will be visible only the selected members. </p> */}
 
                     <Form.Item
                         name="image"

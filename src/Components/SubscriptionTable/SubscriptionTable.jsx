@@ -26,11 +26,13 @@ const SubscriptionTable = () => {
             key: i + 1,
             subscriptionPlan: plan?.planName,
             membershipFee: plan?.fee,
-            pointsRange: plan?.pointRangeEnd,
+            pointsRangeStart: plan?.pointRangeStart,
+            pointsRangeEnd: plan?.pointRangeEnd,
             pointsPerSwap: `${plan?.swapPoint}`,
             pointsPerPositiveComment: plan?.positiveCommentPoint,
             pointsPerNegativeComment: plan?.negativeCommentPoint,
-            productPriceLimit : plan?.productPriceLimit  
+            productPriceLimit : plan?.productPriceLimit,  
+            duration : plan?.duration
         }
     })
 
@@ -52,9 +54,14 @@ const SubscriptionTable = () => {
             key: 'membershipFee',
         },
         {
-            title: 'Points Range',
-            dataIndex: 'pointsRange',
-            key: 'pointsRange',
+            title: 'Points Range Start',
+            dataIndex: 'pointsRangeStart',
+            key: 'pointsRangeStart',
+        },
+        {
+            title: 'Points Range End',
+            dataIndex: 'pointsRangeEnd',
+            key: 'pointsRangeEnd',
         },
         {
             title: 'Point Earn Per Swap',
@@ -70,6 +77,11 @@ const SubscriptionTable = () => {
             title: 'Point Lose Per Negative Comment',
             dataIndex: 'pointsPerNegativeComment',
             key: 'pointsPerNegativeComment',
+        },
+        {
+            title: 'Duration',
+            dataIndex: 'duration',
+            key: 'duration',
         },
         {
             title: 'Action',

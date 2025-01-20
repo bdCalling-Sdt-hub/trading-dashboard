@@ -8,7 +8,7 @@ import { useUpdateAddsMutation } from '../redux/Api/MediaSettingApi'
 import { toast } from 'sonner'
 
 const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
-    const [updateAds] = useUpdateAddsMutation()
+    const [updateAds , {isLoading}] = useUpdateAddsMutation()
     const [form] = Form.useForm()
     const [fileList, setFileList] = useState([]);
     const [isPrivate, setIsPrivate] = useState()
@@ -39,14 +39,13 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
     const onFinish = (values) => {
         const id = addData?.key
         const formData = new FormData();
-        console.log(fileList);
         if(fileList){
             formData.append('image' ,fileList)
         }
-        formData.append("order",values?.viewOrder)
+        // formData.append("order",values?.viewOrder)
         formData.append("url",values?.url )
-        formData.append("isPrivate",isPrivate )
-        formData.append("isActive", isActive)
+        // formData.append("isPrivate",isPrivate )
+        // formData.append("isActive", isActive)
 
         updateAds({id, data:formData}).unwrap()
         .then((payload) => {
@@ -91,13 +90,13 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
                 >
 
 
-                    <Form.Item name={`viewOrder`}
+                    {/* <Form.Item name={`viewOrder`}
                         label={`View Order`}
                        >
                         <Input />
 
                     </Form.Item>
-                    <Checkbox checked={isActive} className="my-2" onChange={handleIsActive} >Active</Checkbox>
+                    <Checkbox checked={isActive} className="my-2" onChange={handleIsActive} >Active</Checkbox> */}
 
                     <Form.Item
                         name={`url`}
@@ -106,8 +105,8 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
                     >
                         <Input className=' border outline-none' placeholder='' />
                     </Form.Item>
-                    <Checkbox checked={isPrivate} onChange={onChange}>Private</Checkbox>
-                    <p className="pb-5">By making a video private, it will be visible only the selected members. </p>
+                    {/* <Checkbox checked={isPrivate} onChange={onChange}>Private</Checkbox>
+                    <p className="pb-5">By making a video private, it will be visible only the selected members. </p> */}
 
                     <Form.Item
                         name="image"
@@ -131,10 +130,8 @@ const EditAddModal = ({ openAddModal, setOpenAddModal, addData }) => {
                     <div className='flex justify-center items-center gap-2'>
                         {/* disabled={isLoading} */}
                         <button className='flex items-center gap-1 py-2 px-4 bg-[#3475F1]  text-white font-semibold rounded-sm'>
-                            {/* {
-                            isLoading ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} /> : <></>
-                            } */}
-                            <TbCopyCheck /> saves
+                           
+                             {isLoading  ? <Spin indicator={<LoadingOutlined style={{ fontSize: 24, color: '#ffffff' }} spin />} />  : <><TbCopyCheck /> save</>}
                         </button>
                         <button onClick={() => setOpenAddModal(false)} className='py-2 px-4 flex items-center gap-1 bg-red-600 text-white font-semibold rounded-sm'>
                             <RxCross2 /> Cancel
