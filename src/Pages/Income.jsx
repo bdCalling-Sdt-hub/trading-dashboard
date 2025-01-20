@@ -27,26 +27,26 @@ const Income = () => {
     const IncomeItems = [
         {
             BalanceName: 'Total Balance',
-            totalBalance: getTotalIncome?.data?.totalIncome,
+            totalBalance: getTotalIncome?.data?.totalIncome?.toFixed(2),
             img: img2,
             color: '#3475F1'
 
         },
         {
             BalanceName: 'Gold-Earned',
-            totalBalance: getTotalIncome?.data?.planIncome[0]?.totalIncome,
+            totalBalance: getTotalIncome?.data?.planIncome[0]?.totalIncome?.toFixed(2),
             img: img1,
             color: '#FAA316'
         },
         {
             BalanceName: 'Platinum-Earned',
-            totalBalance: getTotalIncome?.data?.planIncome[1]?.totalIncome,
+            totalBalance: getTotalIncome?.data?.planIncome[1]?.totalIncome?.toFixed(2),
             img: img1,
             color: '#676767'
         },
         {
             BalanceName: 'Diamond-Earned',
-            totalBalance: getTotalIncome?.data?.planIncome[2]?.totalIncome,
+            totalBalance: getTotalIncome?.data?.planIncome[2]?.totalIncome?.toFixed(2),
             img: img1,
             color: '#77A3F6'
         },
