@@ -10,11 +10,11 @@ import income from './assets/images/income.png'
 import platinum from './assets/images/platinumn.png'
 import gold from './assets/images/dollar_gold.png'
 import diamond from './assets/images/daimond.png'
-import { usePlanSubscriberQuery, useTotalUserCountQuery } from './redux/Api/dashboardApi'
+import { usePlanSubscriberHomeQuery, useTotalUserCountQuery } from './redux/Api/dashboardApi'
 function App() {
   /** Get total user statistics API */
   const {data :  allUser} =useTotalUserCountQuery()
-  const { data: getSubscriber } = usePlanSubscriberQuery()
+  const { data: getSubscriber } = usePlanSubscriberHomeQuery()
 
 
 

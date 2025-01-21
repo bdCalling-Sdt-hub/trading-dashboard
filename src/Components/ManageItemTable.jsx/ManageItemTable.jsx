@@ -192,6 +192,7 @@ const ManageItemTable = ({ search }) => {
               rules={[
                 {
                   message: "Item Name is required",
+                  required : true
                 },
               ]}
             >

@@ -14,46 +14,12 @@ const EditSecondVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
     const [isActive, setIsActive] = useState(false);
 
     const [updateEditVideo , {isLoading}] = useUpdateSecondVideoMutation();
-    console.log(editData);
 
     // Populate the form and state when editing existing data
     useEffect(() => {
         if (editData) {
-            // if (editData?.video) {
-            //     const videoElement = document.createElement('video');
-            //     videoElement.crossOrigin = 'anonymous';
-            //     videoElement.src = `${imageUrl}${editData.video}`;
-            //     console.log(videoElement.src);
-            //     videoElement.addEventListener('loadeddata', () => {
-            //         const canvas = document.createElement('canvas');
-            //         canvas.width = 150; // Thumbnail width
-            //         canvas.height = 90; // Thumbnail height
-            //         const ctx = canvas.getContext('2d');
-    
-            //         // Wait for the video to load enough data to render a frame
-            //         videoElement.currentTime = 1; // Capture frame at 1 second
-            //         videoElement.onseeked = () => {
-            //             ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-    
-            //             const thumbnailUrl = canvas.toDataURL(); // Convert to Base64
-    
-            //             // Update fileList with the generated thumbnail
-            //             setFileList([
-            //                 {
-            //                     uid: '-1',
-            //                     name: 'video-thumbnail.png',
-            //                     status: 'done',
-            //                     url: thumbnailUrl, // Use the generated thumbnail
-            //                 },
-            //             ]);
-            //         };
-            //     });
-            // }
-
-            setIsPrivate(editData?.private || false);
-            setIsActive(editData?.active || false);
+            
             form.setFieldsValue({
-                // video : `${imageUrl}${editData?.video}`,
                 viewOrder: editData?.changeOrder || '',
                 url: editData?.url || '',
             });
@@ -67,10 +33,8 @@ const EditSecondVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
             formData.append('files', fileList[0].originFileObj);
         }
 
-        formData.append('order', values.viewOrder || '');
         formData.append('url', values.url || '');
-        formData.append('isPrivate', isPrivate);
-        formData.append('isActive', isActive);
+    
 
         updateEditVideo({ id: editData?.id, formData })
             .unwrap()
@@ -118,8 +82,7 @@ const EditSecondVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
         setOpenAddModal(false);
         form.resetFields();
         setFileList([]);
-        setIsPrivate(false);
-        setIsActive(false);
+       
     };
 
     return (
@@ -132,21 +95,7 @@ const EditSecondVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
             <div>
                 <p className="text-xl text-center py-2 font-semibold">Edit Second Video</p>
                 <Form form={form} layout="vertical" onFinish={onFinish}>
-                    {/* <Form.Item
-                        name="viewOrder"
-                        label="View Order"
-                        rules={[{ required: true, message: 'Please enter the view order' }]}
-                    >
-                        <Input placeholder="Enter view order" />
-                    </Form.Item> */}
-
-                    {/* <Checkbox
-                        checked={isActive}
-                        onChange={(e) => setIsActive(e.target.checked)}
-                        className="mb-4"
-                    >
-                        Active
-                    </Checkbox> */}
+               
 
                     <Form.Item
                         name="url"
@@ -155,17 +104,6 @@ const EditSecondVideoModal = ({ openAddModal, setOpenAddModal, editData }) => {
                     >
                         <Input placeholder="Enter video URL" />
                     </Form.Item>
-
-                    {/* <Checkbox
-                        checked={isPrivate}
-                        onChange={(e) => setIsPrivate(e.target.checked)}
-                        className="mb-4"
-                    >
-                        Private
-                    </Checkbox> */}
-                    {/* <p className="pb-5 text-sm">
-                        By making the video private, it will only be visible to selected members.
-                    </p> */}
 
                     <Form.Item
                         name="files"

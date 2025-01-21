@@ -27,9 +27,19 @@ const useApi = baseApi.injectEndpoints({
             }
         }),
         planSubscriber: builder.query({
-            query: (page) => {
+            query: ({page , search}) => {
+              
                 return {
-                    url: `/plan/subscribers?page=${page}`,
+                    url: `/plan/subscribers?page=${page}&searchTerm=${search}`,
+                    method: 'GET'
+                }
+            }
+        }),
+        planSubscriberHome: builder.query({
+            query: () => {
+              
+                return {
+                    url: `/plan/subscribers`,
                     method: 'GET'
                 }
             }
@@ -223,4 +233,4 @@ const useApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useTotalIncomeQuery , useTransactionHistoryQuery , useGetSubscriptionGrowthQuery , useDeclineMemberRequestMutation} = useApi
+export const { useTotalUserCountQuery, useGetUserGrowthQuery, usePlanSubscriberQuery, useGetAllCategoryQuery, useCreateCategoryMutation, useGetSingleSubscribePlanQuery, useApproveDeclineMemberRequestMutation , useGetAllNotificationQuery , useDeleteNotificationMutation, useGetAllUserQuery , useBlockUserMutation , useUpdateAboutUsMutation , useGetAboutUsQuery , useGetRulesAndRegulationQuery, useUpdateRulesAndRegulationMutation , useUpdateFactsMutation, useGetFactsQuery , useDeleteCategoryMutation , useEditCategoryMutation , useTotalIncomeQuery , useTransactionHistoryQuery , useGetSubscriptionGrowthQuery , useDeclineMemberRequestMutation , usePlanSubscriberHomeQuery} = useApi

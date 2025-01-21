@@ -88,7 +88,6 @@ const mediaSettingApi = baseApi.injectEndpoints({
         }),
         updateAdds: builder.mutation({
             query: ({ id, data }) => {
-                console.log(id);
                 return {
                     url: `/adds/edit-adds/${id}`,
                     method: 'PATCH',

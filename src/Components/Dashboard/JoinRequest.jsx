@@ -2,9 +2,10 @@ import { Table } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import { imageUrl } from "../../redux/Api/baseApi";
-
+import profile from '../../assets/images/profile.jpg'
 
 const JoinRequest = ({tableData}) => {
+  console.log(tableData);
   const columns = [
     {
       title: "Sl No.",
@@ -18,11 +19,13 @@ const JoinRequest = ({tableData}) => {
       render: (_, record) => {
         return (
           <div className="start-center gap-2">
-            <img
-              src={`${imageUrl}${record?.img}`}
-              className="w-[40px] h-[40px] rounded-[8px]"
-              alt=""
-            />
+           {
+            record?.img ?  <img
+            src={`${imageUrl}${record?.img}`}
+            className="w-[40px] h-[40px] rounded-[8px]"
+            alt=""
+          /> : <img src={profile} className="h-12 w-12" />
+           }
             <p className="font-medium">{record?.name}</p>
           </div>
         );
@@ -74,6 +77,8 @@ const JoinRequest = ({tableData}) => {
         //   },
         // }
       } />
+
+      
 
     </div>
   );

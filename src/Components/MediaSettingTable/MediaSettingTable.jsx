@@ -7,8 +7,7 @@ import { imageUrl } from "../../redux/Api/baseApi";
 import { useDeleteAdsMutation } from "../../redux/Api/MediaSettingApi";
 import { toast } from "sonner";
 import EditAddModal from "../EditAddModal";
-import { MdCheck } from "react-icons/md";
-import { IoMdClose } from "react-icons/io";
+
 const MediaSettingTable = ({ getAllAds, setPage }) => {
     const currentPage = getAllAds?.meta?.page || 1; 
     const pageSize = getAllAds?.meta?.limit || 10;
@@ -21,6 +20,9 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
         setModalTitle('Edit')
         setAddData(record);
     }
+
+    console.log(getAllAds?.data);
+
 
     const handleDeleteAds = (id) => {
         deleteAds(id).unwrap()
@@ -39,36 +41,44 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
             title: 'Ads',
             dataIndex: 'imageUrl',
             key: 'ads',
-            render: (text, record) => <img src={record.imageUrl} alt={record.name} style={{ width: 50, height: 50 }} />,
+            render: (text, record) => {
+                console.log(record);
+                const fileUrl = record?.imageUrl || '';
+                const fileExtension = fileUrl.split('.').pop().toLowerCase();
+        
+                // Check if it's an image
+                const isImage = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'].includes(fileExtension);
+        
+                // Check if it's a video
+                const isVideo = ['mp4', 'webm', 'ogg', 'mov', 'avi', 'mkv'].includes(fileExtension);
+        
+                if (!fileUrl) {
+                    return <span>No media available</span>;
+                }
+        
+                if (isImage) {
+                    return (
+                        <img
+                            src={`${imageUrl}${fileUrl}`}
+                            alt="Image"
+                            style={{ width: 50, height: 50 }}
+                        />
+                    );
+                } else if (isVideo) {
+                    return (
+                        <video
+                            src={`${imageUrl}${fileUrl}`}
+                            style={{ width: 50, height: 50 }}
+                            controls={false}
+                            muted
+                        />
+                    );
+                } else {
+                    return <span>Unsupported media type</span>;
+                }
+            },
         },
-        // {
-        //     title: 'View Order',
-        //     dataIndex: 'viewOrder',
-        //     key: 'viewOrder',
-
-        // },
-        // {
-        //     title: 'Active',
-        //     dataIndex: 'active',
-        //     key: 'active',
-        //     render : (_, record)=>(
-        //         <div>
-        //            {record?.active ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
-        //         </div>
-        //     )
-
-        // }, 
-        // {
-        //     title: 'Private',
-        //     dataIndex: 'private',
-        //     key: 'private',
-        //     render : (_, record)=>(
-        //         <div>
-        //            {record?.private ? <MdCheck className="text-green-500" /> : <IoMdClose className="text-red-600" />}
-        //         </div>
-        //     )
-            
-        // },
+     
         {
             title: 'URL',
             dataIndex: 'url',
@@ -104,10 +114,7 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
         return {
             key: add?._id,
             changeOrder: serialNumber,
-            imageUrl: `${imageUrl}${add?.image}`,
-            // viewOrder: add?.order,
-            // active: add?.isActive ,
-            // private: add?.isPrivate,
+            imageUrl: add?.image,
             url: add?.url
         }
     })

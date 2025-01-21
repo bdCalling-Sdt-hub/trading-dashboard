@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { usePlanSubscriberQuery } from "../redux/Api/dashboardApi";
 import { Pagination } from "antd";
+import { CiSearch } from "react-icons/ci";
 
 const TotalJoinRequest = () => {
+  const [search, setSearch] = useState("")
   const [page, setPage] = useState(1);
-  const { data: getSubscriber } = usePlanSubscriberQuery(page);
-  console.log(getSubscriber?.data?.meta);
+  const { data: getSubscriber } = usePlanSubscriberQuery({page , search});
   const tableData = getSubscriber?.data?.data?.map((user, i) => ({
     key: i + 1,
     id: user?._id,
@@ -18,6 +19,8 @@ const TotalJoinRequest = () => {
     email: user?.email,
     location: user?.place_of_birth,
   }));
+
+  console.log(tableData);
   return (
     <div>
       <div className="between-center  my-2 pt-5">
@@ -27,14 +30,26 @@ const TotalJoinRequest = () => {
           </Link>
           <p className="text-xl">New Join Request</p>
         </div>
-        {/* <Input className='max-w-[250px] h-10' prefix={<CiSearch className='text-2xl' />} placeholder="Search" /> */}
+        <div>
+          <div className="relative">
+            <input
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              placeholder="Search here..."
+              className="w-full pl-10 pr-4 py-1 rounded-md border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 "
+            />
+            <span className="absolute left-3 top-2.5 text-gray-400">
+              <CiSearch />
+            </span>
+          </div>
+        </div>
       </div>
       <JoinRequest tableData={tableData} />
       <div className="flex justify-center mt-5">
         <Pagination
-        onChange={(page)=> setPage(page)}
-        total={getSubscriber?.data?.meta?.total}
-        pageSize={getSubscriber?.data?.meta?.limit}
+          onChange={(page) => setPage(page)}
+          total={getSubscriber?.data?.meta?.total}
+          pageSize={getSubscriber?.data?.meta?.limit}
         />
       </div>
     </div>
