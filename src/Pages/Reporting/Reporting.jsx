@@ -23,7 +23,7 @@ const Reporting = () => {
   const [replyFeedback] = useReplyReportMutation();
   const { data: getAllReport } = useGetAllReportQuery(page);
   const [deleteReport] =  useDeleteReportMutation()
-    console.log(getAllReport?.data?.meta);
+    // console.log(getAllReport?.data?.meta);
 
   const dataSource = getAllReport?.data?.result?.map((feedback) => {
     return {

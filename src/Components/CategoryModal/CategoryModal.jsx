@@ -55,10 +55,11 @@ const CategoryModal = ({ openAddModal, setOpenAddModal }) => {
             rules={[
               {
                 message: "Category Name is required",
+                required : true
               },
             ]}
           >
-            <Input className=" border outline-none" placeholder="" />
+            <Input className=" border outline-none" placeholder=""  />
           </Form.Item>
           <Form.Item label="Image" style={{ width: "100%" }}>
             <div style={{ width: "100%" }}>

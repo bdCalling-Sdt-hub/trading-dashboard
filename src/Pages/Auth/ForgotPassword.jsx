@@ -89,13 +89,8 @@ const ForgotPassword = () => {
                                 marginTop: "30px",
                             }}
                         >
-                            <Link
-                                className="login-form-forgot "
-                                style={{ color: "#FFF" }}
-                                to="/auth/otp"
-                            >
+                           
                                 Send a Code
-                            </Link>
 
                         </Button>
                     </Form.Item>

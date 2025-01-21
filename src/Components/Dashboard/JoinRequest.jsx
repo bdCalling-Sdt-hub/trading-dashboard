@@ -5,7 +5,6 @@ import { imageUrl } from "../../redux/Api/baseApi";
 
 
 const JoinRequest = ({tableData}) => {
- 
   const columns = [
     {
       title: "Sl No.",

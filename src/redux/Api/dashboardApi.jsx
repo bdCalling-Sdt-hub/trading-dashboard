@@ -27,9 +27,9 @@ const useApi = baseApi.injectEndpoints({
             }
         }),
         planSubscriber: builder.query({
-            query: () => {
+            query: (page) => {
                 return {
-                    url: '/plan/subscribers',
+                    url: `/plan/subscribers?page=${page}`,
                     method: 'GET'
                 }
             }

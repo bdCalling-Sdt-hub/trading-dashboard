@@ -16,6 +16,8 @@ const Profile = () => {
     const [updateProfile, { isLoading }] = useUpdateProfileMutation()
     const [changePassword, { isLoading: changePasswordLoading }] = useChangePasswordMutation()
 
+    console.log(getProfile);
+
     const navigate = useNavigate()
 
     const [image, setImage] = useState();

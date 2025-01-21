@@ -199,7 +199,8 @@ const ManageItems = () => {
               label={`Sub Category Name`}
               rules={[
                 {
-                  message: "Item Name is required",
+                  message: "Sub Category is required",
+                  required : true
                 },
               ]}
             >

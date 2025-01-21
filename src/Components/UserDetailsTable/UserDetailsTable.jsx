@@ -8,6 +8,7 @@ import { FaRegUser } from "react-icons/fa";
 const UserDetailsTable = ({ search }) => {
     const [page, setPage] = useState(1)
     const { data: getAllUser, isLoading } = useGetAllUserQuery({ search, page })
+    console.log(getAllUser);
     const [blockUser] = useBlockUserMutation()
     const columns = [
         {
