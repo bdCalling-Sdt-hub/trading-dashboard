@@ -79,6 +79,11 @@ const SubscriptionTable = () => {
             key: 'pointsPerNegativeComment',
         },
         {
+            title: 'Product Pice Limit',
+            dataIndex: 'productPriceLimit',
+            key: 'productPriceLimit',
+        },
+        {
             title: 'Duration',
             dataIndex: 'duration',
             key: 'duration',

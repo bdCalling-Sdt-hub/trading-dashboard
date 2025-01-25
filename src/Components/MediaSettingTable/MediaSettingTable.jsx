@@ -21,7 +21,6 @@ const MediaSettingTable = ({ getAllAds, setPage }) => {
         setAddData(record);
     }
 
-    console.log(getAllAds?.data);
 
 
     const handleDeleteAds = (id) => {
